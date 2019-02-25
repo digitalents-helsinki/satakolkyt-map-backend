@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
+    "db:start": "./starth.sh satakolkyt",
     "build": "tsc",
     "watch": "yarn build --watch",
     "nodemon": "nodemon --signal SIGHUP dist/index.js -q",
