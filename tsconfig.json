@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es7", "es2017.object", "dom"],
+
+    "pretty": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+
+    "strict": false,
+
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    "esModuleInterop": true
+  }
+}
