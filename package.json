@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "db:start": "./start.sh satakolkyt",
+    "db:populate-geojson": "node ./scripts/populate-db.js",
     "build": "tsc",
     "watch": "yarn build --watch",
     "nodemon": "nodemon --signal SIGHUP dist/index.js -q",

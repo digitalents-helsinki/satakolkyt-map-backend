@@ -19,5 +19,10 @@ Please different credentials on production!
 ### Getting started
 
 - `$ yarn` to install dependencies.
-- `$ yarn run db:start` to start and initialize the database.
+- `$ yarn run db:start` to start and initialize the database. (See /starth.sh script.)
 - `$ yarn run dev` to start the server with nodemon.
+- `$ yarn run db:populate-geojson` to populate with default geojson data from the `scripts/data/geo.json` file.
+
+### ArangoDB
+
+Once you've initiated ArangoDB using the `start.sh` script and everything went well, you should be able to use the database dashboard by navigating to http://127.0.0.1:8529. The user/pass/database is whatever you used in the .env file (`DB_USER`/`DB_PASS`/`DB_NAME`, respectively.)
