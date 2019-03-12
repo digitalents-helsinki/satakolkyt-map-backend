@@ -5,7 +5,7 @@ const connectionConfig = {
   username: config.arangodb.username,
   password: config.arangodb.password,
   database: config.arangodb.database,
-  url: config.arangodb.url
+  url: config.arangodb.url  
 }
 
 export const db = new Database({ url: connectionConfig.url })
