@@ -7,7 +7,6 @@ import { RequestHandler } from 'express'
  */
 export const getShore: RequestHandler = async (req, res, next) => {
   try {
-    console.log(req.params.key)
     const geojsonFeaturesCollection = db.collection('geojson_features')
 
     const document = await geojsonFeaturesCollection.document(req.params.key)
