@@ -6,6 +6,6 @@ export const app = express()
 //cors
 app.use(cors())
 // Bodyparser
-app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyparser.json()); // support json encoded bodies
   app.use(express.static('public'));
 app.use('/api', apiRouter)
