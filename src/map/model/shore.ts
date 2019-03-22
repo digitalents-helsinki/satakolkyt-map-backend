@@ -34,7 +34,7 @@ export default class ShoreModel {
         RETURN doc
     `)
 
-    return await cursor.all()
+    return cursor.all()
   }
 
   /**
@@ -47,10 +47,21 @@ export default class ShoreModel {
         RETURN doc
     `)
 
-    return await cursor.all()
+    return cursor.all()
+  }
+  /**
+   * Gets one shore doc by its key.
+   */
+  static async getShore(key: string): Promise<IShoreModel> {
+    return collection.document(key)
   }
 
-  static async getShore(key: string): Promise<IShoreModel> {
-    return await collection.document(key)
+  /**
+   * Update shore document.
+   */
+  static async updateShoreDocument(key: string, data: any) {
+    return collection.update(key, data, {
+      mergeObjects: false
+    })
   }
 }
