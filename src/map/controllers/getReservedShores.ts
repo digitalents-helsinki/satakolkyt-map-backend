@@ -1,5 +1,4 @@
-import { aql } from 'arangojs'
-import { db } from '@/config/arangodb'
+import ShoreModel from '../model/shore'
 import { RequestHandler } from 'express'
 
 /**
@@ -7,15 +6,7 @@ import { RequestHandler } from 'express'
  */
 export const getReservedShores: RequestHandler = async (req, res, next) => {
   try {
-    const geojsonFeaturesCollection = db.collection('geojson_features')
-const active = "reserved";
-    const cursor = await db.query(aql`
-      FOR doc IN ${geojsonFeaturesCollection}
-  FILTER doc.state.status == ${active}
-          RETURN doc
-    `)
-
-    res.send({ data: await cursor.all() })
+    res.send({ data: await ShoreModel.getReservedShores() })
   } catch (err) {
     res.send({ error: err.message })
   }

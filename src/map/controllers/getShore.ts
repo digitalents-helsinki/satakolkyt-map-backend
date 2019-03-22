@@ -1,5 +1,4 @@
-import { aql } from 'arangojs'
-import { db } from '@/config/arangodb'
+import ShoreModel from '../model/shore'
 import { RequestHandler } from 'express'
 
 /**
@@ -7,11 +6,7 @@ import { RequestHandler } from 'express'
  */
 export const getShore: RequestHandler = async (req, res, next) => {
   try {
-    const geojsonFeaturesCollection = db.collection('geojson_features')
-
-    const document = await geojsonFeaturesCollection.document(req.params.key)
-
-    res.send({ data: document })
+    res.send({ data: await ShoreModel.getShore(req.params.key) })
   } catch (err) {
     res.send({ error: err.message })
   }

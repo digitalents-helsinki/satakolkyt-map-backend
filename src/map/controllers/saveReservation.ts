@@ -1,3 +1,4 @@
+import ShoreModel from '../model/shore'
 import { aql } from 'arangojs'
 import { db } from '@/config/arangodb'
 import { RequestHandler } from 'express'
@@ -7,12 +8,11 @@ import { RequestHandler } from 'express'
  */
 export const saveReservation: RequestHandler = async (req, res, next) => {
   try {
-    const geojsonFeaturesCollection = db.collection('geojson_features')
-    console.log(req.body.key)
-    //const document = await geojsonFeaturesCollection.updatByExample()
-    console.log('request send')
-    const document = await geojsonFeaturesCollection.update(req.body.key, {state:{status:'reserved',data:'x'}})
-    //res.send({ reserved: document,free: })
+    const { _key } = await ShoreModel.updateShoreDocument(req.body.key, {
+      state: { status: 'boo', data: 'x', foo: 'bar' }
+    })
+
+    res.send({ data: await ShoreModel.getShore(_key) })
     res.end()
   } catch (err) {
     res.send({ error: err.message })
