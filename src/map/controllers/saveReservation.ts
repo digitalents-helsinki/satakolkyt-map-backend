@@ -12,7 +12,7 @@ export const saveReservation: RequestHandler = async (req, res, next) => {
     //const document = await geojsonFeaturesCollection.updatByExample()
     console.log('request send')
     const document = await geojsonFeaturesCollection.update(req.body.key, {state:{status:'reserved',data:'x'}})
-    //res.send({ data: document })
+    //res.send({ reserved: document,free: })
     res.end()
   } catch (err) {
     res.send({ error: err.message })

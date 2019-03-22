@@ -5,13 +5,13 @@ import { RequestHandler } from 'express'
 /**
  * Returns all geosjon feature objects from the db collection.
  */
-export const getShores: RequestHandler = async (req, res, next) => {
+export const getReservedShores: RequestHandler = async (req, res, next) => {
   try {
     const geojsonFeaturesCollection = db.collection('geojson_features')
 const active = "reserved";
     const cursor = await db.query(aql`
       FOR doc IN ${geojsonFeaturesCollection}
-  FILTER doc.state.status != ${active}
+  FILTER doc.state.status == ${active}
           RETURN doc
     `)
 
