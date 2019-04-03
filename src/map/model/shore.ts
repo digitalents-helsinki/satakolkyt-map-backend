@@ -31,6 +31,8 @@ export default class ShoreModel {
     const cursor = await db.query(aql`
       FOR doc IN ${collection}
         FILTER doc.state.status != 'reserved'
+        FILTER doc.state.status != 'hidden'
+
         RETURN doc
     `)
 
