@@ -51,6 +51,20 @@ export default class ShoreModel {
 
     return cursor.all()
   }
+
+  /**
+   * Gets all shores that DOES equal to 'cleaned' in state
+   */
+  static async getCleanedShores(): Promise<IShoreModel[]> {
+    const cursor = await db.query(aql`
+      FOR doc IN ${collection}
+        FILTER doc.state.status == 'cleaned'
+        return doc
+    `)
+
+    return cursor.all()
+  }
+
   /**
    * Gets one shore doc by its key.
    */
