@@ -32,6 +32,7 @@ export default class ShoreModel {
       FOR doc IN ${collection}
         FILTER doc.state.status != 'reserved'
         FILTER doc.state.status != 'hidden'
+        FILTER doc.state.status != 'cleaned'
 
         RETURN doc
     `)
