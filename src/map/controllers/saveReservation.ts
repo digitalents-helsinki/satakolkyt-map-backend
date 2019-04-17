@@ -18,7 +18,7 @@ export const saveReservation: RequestHandler = async (req, res, next) => {
     })
 
 
-    res.send({ json: await ShoreModel.getShore(_key) })
+    res.send({ json: await ShoreModel.getShore(_key), status: "ok" })
     res.end()
   } catch (err) {
     res.send({ error: err.message })

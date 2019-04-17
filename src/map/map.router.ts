@@ -11,6 +11,7 @@ import { getCleanInfos } from './controllers/getCleaninfos'
 import { getShore } from './controllers/getShore'
 
 import { saveReservation } from './controllers/saveReservation'
+import { removeReservation } from './controllers/removeReservation'
 import { hideShore } from './controllers/hideShore'
 import { cleanShore } from './controllers/cleanShore'
 
@@ -30,6 +31,7 @@ router.get('/cleaninfos/', getCleanInfos)
 router.post('/delete/:key', hideShore)
 router.post('/reserve/', reserveBeach)
 router.post('/cleanbeach', saveReservation)
+router.post('/cancelcleanbeach', removeReservation)
 router.post('/clean/', cleanShore)
 router.post('/cleaninfo', saveCleanInfo)
 
