@@ -27,4 +27,15 @@ export default class ReservationModel {
 
     return cursor.all()
   }
+  static async getReservation(key: string): Promise<IReservationModel> {
+    return collection.document(key)
+  }
+  /**
+   * Update reservation document.
+   */
+  static async updateReservation(key: string, data: any) {
+    return collection.update(key, data, {
+      mergeObjects: false
+    })
+  }
 }
