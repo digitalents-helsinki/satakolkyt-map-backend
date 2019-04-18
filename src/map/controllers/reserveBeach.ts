@@ -14,6 +14,7 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
       meta => console.log('Document saved:', meta._rev),
       err => console.error('Failed to save document:', err)
     );
+    res.send({ status: "ok" })
     res.end()
 
   } catch (err) {
