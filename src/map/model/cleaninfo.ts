@@ -26,4 +26,9 @@ export default class CleanInfoModel {
 
     return cursor.all()
   }
+  static async updateCleaned(key: string, data: any) {
+    return collection.update(key, data, {
+      mergeObjects: false
+    })
+  }
 }

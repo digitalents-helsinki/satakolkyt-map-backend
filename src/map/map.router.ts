@@ -16,6 +16,8 @@ import { hideShore } from './controllers/hideShore'
 import { cleanShore } from './controllers/cleanShore'
 
 import { reserveBeach } from './controllers/reserveBeach'
+import { removeCleanShore } from './controllers/removeCleanShore'
+
 import { saveCleanInfo } from './controllers/saveCleaninfo'
 
 export const router = Router()
@@ -32,6 +34,8 @@ router.post('/delete/:key', hideShore)
 router.post('/reserve/', reserveBeach)
 router.post('/cleanbeach', saveReservation)
 router.post('/cancelcleanbeach', removeReservation)
+router.post('/cancelcleanedbeach', removeCleanShore)
+
 router.post('/clean/', cleanShore)
 router.post('/cleaninfo', saveCleanInfo)
 
