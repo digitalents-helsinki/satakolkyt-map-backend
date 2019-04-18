@@ -52,6 +52,15 @@ export default class ShoreModel {
 
     return cursor.all()
   }
+  static async getHiddenShores(): Promise<IShoreModel[]> {
+    const cursor = await db.query(aql`
+      FOR doc IN ${collection}
+        FILTER doc.state.status == 'hidden'
+        RETURN doc
+    `)
+
+    return cursor.all()
+  }
 
   /**
    * Gets all shores that DOES equal to 'cleaned' in state
