@@ -1,8 +1,8 @@
 import { Router } from 'express'
 
-import { login }  from '../login'
+import { login } from '../login'
 import { checkToken } from '../jwt'
-
+const { check } = require('express-validator/check')
 import { getFreeShores } from './controllers/getFreeShores'
 import { getReservedShores } from './controllers/getReservedShores'
 import { getCleanedShores } from './controllers/getCleanedShores'
@@ -37,7 +37,23 @@ router.get('/reservations/', getReservations)
 router.get('/cleaninfos/', getCleanInfos)
 
 router.post('/delete/:key', hideShore)
-router.post('/reserve/', reserveBeach)
+router.post(
+  '/reserve/',
+  [
+    check('email').exists(),
+    check('name').exists(),
+    check('organizer').exists(),
+    check('starttime').exists(),
+    check('endtime').exists(),
+    check('phonenumber').exists(),
+    check('selected.key').exists(),
+    check('selected').exists(),
+
+    check(['startdate', 'enddate']).isISO8601(),
+    check('type').isIn(['open', 'private'])
+  ],
+  reserveBeach
+)
 router.post('/cleanbeach', saveReservation)
 router.post('/cancelcleanbeach', removeReservation)
 router.post('/cancelcleanedbeach', removeCleanShore)
