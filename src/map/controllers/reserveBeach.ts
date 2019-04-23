@@ -17,8 +17,9 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
         meta => console.log('Document saved:', meta._rev),
         err => console.error('Failed to save document:', err)
       )
+    const validationOn = false // disable validation during dev
     const errors = validationResult(req)
-    if (!errors.isEmpty()) {
+    if (!errors.isEmpty() && validationOn) {
       return res.status(422).json({ errors: errors.array() })
     }
     res.send({ status: 'ok' })
