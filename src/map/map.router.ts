@@ -34,10 +34,10 @@ router.get('/shores/hidden', getHiddenShores)
 
 router.get('/shores/cleaned', getCleanedShores)
 
-router.get('/reservations/', getReservations)
-router.get('/cleaninfos/', getCleanInfos)
+router.get('/reservations/', checkToken, getReservations)
+router.get('/cleaninfos/', checkToken, getCleanInfos)
 
-router.post('/delete/:key', hideShore)
+router.post('/delete/:key', checkToken, hideShore)
 router.post(
   '/reserve/',
   [
@@ -56,10 +56,10 @@ router.post(
   reserveBeach
 )
 router.post('/cleanbeach', saveReservation)
-router.post('/cancelcleanbeach', removeReservation)
-router.post('/cancelcleanedbeach', removeCleanShore)
-router.post('/unhidebeach', unhideBeach)
-router.delete('/reservation', deleteReservation)
+router.post('/cancelcleanbeach', checkToken, removeReservation)
+router.post('/cancelcleanedbeach', checkToken, removeCleanShore)
+router.post('/unhidebeach', checkToken, unhideBeach)
+router.delete('/reservation', checkToken, deleteReservation)
 router.post('/clean/', cleanShore)
 router.post(
   '/cleaninfo',
