@@ -23,6 +23,7 @@ import { unhideBeach } from './controllers/unhideBeach'
 import { removeCleanShore } from './controllers/removeCleanShore'
 
 import { saveCleanInfo } from './controllers/saveCleaninfo'
+import { deleteReservation } from './controllers/deleteReservation'
 
 export const router = Router()
 
@@ -58,8 +59,24 @@ router.post('/cleanbeach', saveReservation)
 router.post('/cancelcleanbeach', removeReservation)
 router.post('/cancelcleanedbeach', removeCleanShore)
 router.post('/unhidebeach', unhideBeach)
-
+router.delete('/reservation', deleteReservation)
 router.post('/clean/', cleanShore)
-router.post('/cleaninfo', saveCleanInfo)
+router.post(
+  '/cleaninfo',
+  [
+    check('organizer_name').exists(),
+    check('leader_name').exists(),
+    check('leader_phone').exists(),
+    check('group_size').exists(),
+    check('trash_amount').exists(),
+    check('phonenumber').exists(),
+    check('selected.key').exists(),
+    check('selected').exists(),
+
+    check(['date']).isISO8601(),
+    check('trash_left').exists
+  ],
+  saveCleanInfo
+)
 
 router.post('/login', login)
