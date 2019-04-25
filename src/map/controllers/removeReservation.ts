@@ -5,14 +5,16 @@ import { RequestHandler } from 'express'
 export const removeReservation: RequestHandler = async (req, res, next) => {
   try {
     const { _key } = await ShoreModel.updateShoreDocument(req.body.key, {
-        state: { status: 'free', data: 'x', foo: 'bar' }
+      state: { status: 'free', data: 'x', foo: 'bar' }
     })
-    const { reservation } = await ReservationModel.updateReservation(req.body.reservation, {
-      confirm:false,
-    })
+    const { reservation } = await ReservationModel.updateReservation(
+      req.body.reservation,
+      {
+        confirm: false
+      }
+    )
 
-
-    res.send({status: "ok"})
+    res.send({ json: await ShoreModel.getShore(_key), status: 'ok' })
     res.end()
   } catch (err) {
     res.send({ error: err.message })
