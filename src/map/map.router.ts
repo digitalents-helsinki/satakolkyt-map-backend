@@ -72,9 +72,12 @@ router.post(
     check('phonenumber').exists(),
     check('selected.key').exists(),
     check('selected').exists(),
-
     check(['date']).isISO8601(),
-    check('trash_left').exists
+    check('trash_left').exists(),
+    check('kurtturuusu').exists(),
+    check('jattipalsami').exists(),
+    check('foreignspeciesdetail').exists(),
+    check('cleanmoreinfo').exists()
   ],
   saveCleanInfo
 )
