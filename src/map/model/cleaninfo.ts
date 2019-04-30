@@ -4,17 +4,21 @@ import { db } from '@/config/arangodb'
 const collection = db.collection('cleaninfos')
 
 interface ICleanInfoModel {
-  '_key' ?: string
-  '_id' ?: string
-  '_rev' ?: string
-  'date' ?: string
-  'organizer_name' ?: string
-  'leader_name' ?: string
-  'leader_email' ?: string
-  'leader_phone' ?: string
-  'group_size' ?: number
-  'trash_amount' ?: number
-  'trash_left' ?: boolean
+  _key?: string
+  _id?: string
+  _rev?: string
+  date?: string
+  organizer_name?: string
+  leader_name?: string
+  leader_email?: string
+  leader_phone?: string
+  group_size?: number
+  trash_amount?: number
+  trash_left?: boolean
+  kurtturuusu?: string
+  jattipalsami?: string
+  foreignspeciesdetail?: string
+  cleanmoreinfo?: string
 }
 
 export default class CleanInfoModel {
