@@ -3,7 +3,6 @@ import { RequestHandler } from 'express'
 export const csfrToken: RequestHandler = async (req, res, next) => {
   try {
     //something wrong with lint
-    console.log(req)
     res.send({ token: req.cookies._csrf })
     res.end()
   } catch (err) {
