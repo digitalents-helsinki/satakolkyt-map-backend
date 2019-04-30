@@ -74,6 +74,7 @@ router.post(
     check('selected').exists(),
     check(['date']).isISO8601(),
     check('trash_left').exists(),
+    check('trash_bags_info').exists(),
     check('kurtturuusu').exists(),
     check('jattipalsami').exists(),
     check('foreignspeciesdetail').exists(),

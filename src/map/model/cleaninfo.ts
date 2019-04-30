@@ -15,6 +15,7 @@ interface ICleanInfoModel {
   group_size?: number
   trash_amount?: number
   trash_left?: boolean
+  trash_bags_info?: string
   kurtturuusu?: string
   jattipalsami?: string
   foreignspeciesdetail?: string
