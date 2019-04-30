@@ -2,23 +2,19 @@ import express from 'express'
 import bodyparser from 'body-parser'
 import { router as apiRouter } from '@/api'
 import cors from 'cors'
-const csurf = require('csurf')
-const cookieParser = require('cookie-parser')
+import cookieParser from 'cookie-parser'
+
 export const app = express()
 
-const csrfMiddleware = csurf({
-  cookie: true
-})
+app.use(cookieParser())
+
 //cors
-app.use(cors())
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  )
-  next()
-})
+app.use(
+  cors({
+    origin: '*',
+    credentials: false
+  })
+)
 
 // Bodyparser
 app.use(bodyparser.json()) // support json encoded bodies

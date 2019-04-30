@@ -6,11 +6,13 @@ const { validationResult } = require('express-validator/check')
 export const saveCleanInfo: RequestHandler = async (req, res, next) => {
   try {
     console.log(req.body)
-    /*const errors = validationResult(req)
+    const errors = validationResult(req)
     if (!errors.isEmpty()) {
       console.log(errors)
-      return res.status(422).json({ errors: errors.array() })
-    }*/
+      //return res.status(422).json({ errors: errors.array() })
+    } else {
+      console.log('saveCleaninfo: No validation errors!')
+    }
     collection
       .save(req.body)
       .then(

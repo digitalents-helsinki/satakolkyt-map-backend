@@ -1,10 +1,10 @@
 import { RequestHandler } from 'express'
 
 /* eslint-disable  */
-export const csfrToken: RequestHandler = async (req, res, next) => {
+export const csrfToken: RequestHandler = async (req, res, next) => {
   try {
     //something wrong with lint
-    res.send({ token: req.csrfToken() })
+    res.send({ token: req['csrfToken']() }) //typescript made me do it
     res.end()
   } catch (err) {
     res.send({ error: err.message })
