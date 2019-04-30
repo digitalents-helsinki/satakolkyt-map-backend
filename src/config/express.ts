@@ -11,9 +11,17 @@ const csrfMiddleware = csurf({
 })
 //cors
 app.use(cors())
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
+  next()
+})
+
 // Bodyparser
 app.use(bodyparser.json()) // support json encoded bodies
-app.use(cookieParser())
-app.use(csrfMiddleware)
+
 app.use(express.static('public'))
 app.use('/api', apiRouter)

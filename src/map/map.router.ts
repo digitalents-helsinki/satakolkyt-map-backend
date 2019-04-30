@@ -25,8 +25,10 @@ import { removeCleanShore } from './controllers/removeCleanShore'
 import { saveCleanInfo } from './controllers/saveCleaninfo'
 import { deleteReservation } from './controllers/deleteReservation'
 import { csfrToken } from './controllers/csfrToken'
-var csurf = require('csurf')
-var csrfProtection = csurf({ cookie: true })
+var csrf = require('csurf')
+
+var csrfProtection = csrf({ cookie: true })
+
 export const router = Router()
 
 router.get('/shores', getFreeShores)
