@@ -8,17 +8,19 @@ import { RequestHandler } from 'express'
 /**
  * Returns all geosjon feature objects from the db collection.
  */
-export const saveReservation: RequestHandler = async (req, res, next) => {
+export const confirmReservation: RequestHandler = async (req, res, next) => {
   try {
     const { _key } = await ShoreModel.updateShoreDocument(req.body.key, {
       state: { status: 'reserved', data: 'x', foo: 'bar' }
     })
-    const { reservation } = await ReservationModel.updateReservation(req.body.reservation, {
-      confirm:true,
-    })
+    const { reservation } = await ReservationModel.updateReservation(
+      req.body.reservation,
+      {
+        confirmed: true
+      }
+    )
 
-
-    res.send({ json: await ShoreModel.getShore(_key), status: "ok" })
+    res.send({ json: await ShoreModel.getShore(_key), status: 'ok' })
     res.end()
   } catch (err) {
     res.send({ error: err.message })
