@@ -7,12 +7,13 @@ interface IReservationModel {
   _key?: string
   _id?: string
   _rev?: string
+  confirmed?: boolean
+  organizer?: string
   startdate?: string
   starttime?: string
   enddate?: string
   endtime?: string
-  type?: string
-  organizer?: string
+  openevent?: boolean
   name?: string
   phonenumbery?: string
   email?: string

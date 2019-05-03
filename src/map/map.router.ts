@@ -12,8 +12,8 @@ import { getReservations } from './controllers/getReservations'
 import { getCleanInfos } from './controllers/getCleaninfos'
 import { getShore } from './controllers/getShore'
 
-import { saveReservation } from './controllers/saveReservation'
-import { removeReservation } from './controllers/removeReservation'
+import { confirmReservation } from './controllers/confirmReservation'
+import { cancelReservation } from './controllers/cancelReservation'
 import { hideShore } from './controllers/hideShore'
 import { cleanShore } from './controllers/cleanShore'
 
@@ -48,22 +48,24 @@ router.post('/delete/:key', checkToken, hideShore)
 router.post(
   '/reserve/',
   [
-    check('email').exists(),
-    check('name').exists(),
+    check('confirmed').exists(),
     check('organizer').exists(),
+    check(['startdate', 'enddate']).isISO8601(),
     check('starttime').exists(),
     check('endtime').exists(),
+    check('openevent').exists(),
+    check('openinfo').exists(),
+    check('openlink').exists(),
+    check('name').exists(),
+    check('email').exists(),
     check('phonenumber').exists(),
     check('selected.key').exists(),
-    check('selected').exists(),
-
-    check(['startdate', 'enddate']).isISO8601(),
-    check('type').isIn(['open', 'private'])
+    check('selected').exists()
   ],
   reserveBeach
 )
-router.post('/cleanbeach', saveReservation)
-router.post('/cancelcleanbeach', checkToken, removeReservation)
+router.post('/confirmreservation', confirmReservation)
+router.post('/cancelreservation', checkToken, cancelReservation)
 router.post('/cancelcleanedbeach', checkToken, removeCleanShore)
 router.post('/unhidebeach', checkToken, unhideBeach)
 router.delete('/reservation', checkToken, deleteReservation)
