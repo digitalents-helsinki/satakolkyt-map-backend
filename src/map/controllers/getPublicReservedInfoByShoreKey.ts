@@ -1,9 +1,15 @@
 import ReservationModel from '../model/reservation'
 import { RequestHandler } from 'express'
 
-export const getPublicReservedInfo: RequestHandler = async (req, res, next) => {
+export const getPublicReservedInfoByShoreKey: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
   try {
-    const reserv = await ReservationModel.getReservation(req.params.key)
+    const reserv = (await ReservationModel.getReservationByShoreKey(
+      req.params.key
+    ))[0]
     //sanitize private info:
     reserv.name = null
     reserv.email = null

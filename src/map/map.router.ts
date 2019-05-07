@@ -12,7 +12,7 @@ import { getReservations } from './controllers/getReservations'
 import { getCleanInfos } from './controllers/getCleaninfos'
 import { getShore } from './controllers/getShore'
 
-import { getPublicReservedInfo } from './controllers/getPublicReservedInfo'
+import { getPublicReservedInfoByShoreKey } from './controllers/getPublicReservedInfoByShoreKey'
 
 import { confirmReservation } from './controllers/confirmReservation'
 import { cancelReservation } from './controllers/cancelReservation'
@@ -46,8 +46,8 @@ router.get('/shores/cleaned', getCleanedShores)
 router.get('/reservations/', checkToken, getReservations)
 router.get('/cleaninfos/', checkToken, getCleanInfos)
 
-router.get('/reservedinfo/:key', getPublicReservedInfo)
-//router.get('/cleanedinfo/:key', getPublicCleanedInfo)
+router.get('/reservedinfo/:key', getPublicReservedInfoByShoreKey)
+//router.get('/cleanedinfo/:key', getPublicCleanedInfoByShoreKey)
 
 router.post('/delete/:key', checkToken, hideShore)
 router.post(

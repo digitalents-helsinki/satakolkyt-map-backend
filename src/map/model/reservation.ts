@@ -34,6 +34,18 @@ export default class ReservationModel {
   static async getReservation(key: string): Promise<IReservationModel> {
     return collection.document(key)
   }
+
+  static async getReservationByShoreKey(
+    key: string
+  ): Promise<IReservationModel> {
+    const cursor = await db.query(aql`
+      FOR doc IN ${collection}
+        FILTER doc.selected.key == ${key}
+        RETURN doc
+    `)
+
+    return cursor.all()
+  }
   /**
    * Update reservation document.
    */
