@@ -23,7 +23,7 @@ up_func() {
   describe_echo "Starting the arangodb container..."
   docker-compose up -d --build
 
-  if [ $? -eq 0 ] 
+  if [ $? -eq 0 ]
   then
     success_echo "Containers are up!"
   else
@@ -48,16 +48,16 @@ init_db_func() {
   describe_echo "Creating '$1' database..."
 
   # Wait couple of seconds before executing...
-  SECONDS=5 #
+  SECONDS=10 #
   echo "Waiting for containers to initialize... ($SECONDS seconds)"
   sleep $SECONDS
 
   ## execute stuff on the arangodb container...
-  docker exec satakolkyt-arangodb arangosh \
+  docker exec satakolkytarangodb3 arangosh \
     --server.password '' \
     --javascript.execute-string "db._createDatabase('$1')"
 
-  if [ $? -eq 0 ] 
+  if [ $? -eq 0 ]
   then
     success_echo "Database '$1' created successfully."
   else

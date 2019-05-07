@@ -1,8 +1,27 @@
-version: "3.2"
+version: "3.3"
 
 services:
+  app:
+    container_name: express-satakolkyt
+    restart: always
+    build: ./
+    ports:
+      - "8089:8089"
+    volumes:
+      - .:/app
+    links:
+      - arangodb
+    environment:
+      - PORT=8089
+      - DB_USER=root
+      - DB_PASS=root
+      - DB_URL=http://satakolkytarangodb3:8529
+      - DB_NAME=satakolkyt
+      - FRONT_USER=test
+      - FRONT_PASS=test
+
   arangodb:
-    container_name: satakolkyt-arangodb
+    container_name: satakolkytarangodb3
     image: arangodb/arangodb
     restart: always
     ports:

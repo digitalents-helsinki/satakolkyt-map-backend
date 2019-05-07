@@ -19,7 +19,7 @@ Please different credentials on production!
 ### Getting started
 
 - `$ yarn` to install dependencies.
-- `$ yarn run db:start` to start and initialize the database. (See /starth.sh script.)
+- `$ yarn run db:start` to start and initialize the database and express (See /starth.sh script.)
 - `$ yarn run db:populate-geojson` to populate with default geojson data from the `scripts/data/geo.json` file.
 - `$ yarn run dev` to start the server with nodemon.
 
