@@ -14,8 +14,11 @@ interface IReservationModel {
   enddate?: string
   endtime?: string
   openevent?: boolean
+  openinfo?: string
+  openlink?: string
+  selected?: Object
   name?: string
-  phonenumbery?: string
+  phonenumber?: string
   email?: string
 }
 
