@@ -31,6 +31,17 @@ export default class CleanInfoModel {
 
     return cursor.all()
   }
+
+  static async getCleanedByShoreKey(key: string): Promise<ICleanInfoModel> {
+    const cursor = await db.query(aql`
+      FOR doc IN ${collection}
+        FILTER doc.selected.key == ${key}
+        RETURN doc
+    `)
+
+    return cursor.all()
+  }
+
   static async updateCleaned(key: string, data: any) {
     return collection.update(key, data, {
       mergeObjects: false
