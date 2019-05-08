@@ -1,0 +1,14 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN yarn
+
+COPY . .
+
+EXPOSE 8089
+RUN yarn build
+
+CMD [ "yarn", "nodemon" ]
