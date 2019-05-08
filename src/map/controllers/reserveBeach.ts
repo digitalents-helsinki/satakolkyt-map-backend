@@ -10,9 +10,11 @@ const collection = db.collection('reservations')
  */
 export const reserveBeach: RequestHandler = async (req, res, next) => {
   try {
-    console.log(req.body)
+    const data = req.body
+    data.userip = req.connection.remoteAddress
+    console.log(data)
     collection
-      .save(req.body)
+      .save(data)
       .then(
         meta => console.log('Document saved:', meta._rev),
         err => console.error('Failed to save document:', err)
@@ -25,9 +27,7 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
     //everything ok, set shore as reserved
     const { _key } = await ShoreModel.updateShoreDocument(
       req.body.selected.key,
-      {
-        state: { status: 'reserved' }
-      }
+      { status: 'reserved' }
     )
 
     res.send({ json: await ShoreModel.getShore(_key), status: 'ok' })

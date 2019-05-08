@@ -14,6 +14,7 @@ export const getPublicReservedInfoByShoreKey: RequestHandler = async (
     reserv.name = null
     reserv.email = null
     reserv.phonenumber = null
+    reserv.userip = null
     res.send({ data: reserv })
   } catch (err) {
     res.send({ error: err.message })
