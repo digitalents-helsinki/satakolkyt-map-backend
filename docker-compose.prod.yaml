@@ -4,21 +4,33 @@ services:
   app:
     container_name: expresssatakolkyt
     restart: always
-    build: ./
+    build:
+      context: .
+      dockerfile: Dockerfile-prod
     ports:
       - "8089:8089"
     volumes:
-      - .:/app
+      - ./:/app
     links:
       - arangodb
-    environment:
-      - PORT=8089
-      - DB_USER=root
-      - DB_PASS=root
-      - DB_URL=http://satakolkytarangodb3:8529
-      - DB_NAME=satakolkyt
-      - FRONT_USER=test
-      - FRONT_PASS=test
+    env_file:
+      - .env
+  nginx:
+    image: nginx:latest
+    restart: always
+    container_name: production_nginx
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt/:/etc/letsencrypt/
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - arangodb
+      - app
 
   arangodb:
     container_name: satakolkytarangodb3
