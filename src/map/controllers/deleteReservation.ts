@@ -11,11 +11,12 @@ import { RequestHandler } from 'express'
 export const deleteReservation: RequestHandler = async (req, res, next) => {
   try {
     const { _key } = await ShoreModel.updateShoreDocument(req.body.key, {
-      state: { status: 'free', data: 'x', foo: 'bar' }
+      status: 'free'
     })
     await ReservationModel.removeReservation(req.body.id)
 
-    res.end('deleted')
+    res.send({ json: await ShoreModel.getShore(_key), status: 'ok' })
+    res.end()
   } catch (err) {
     res.send({ error: err.message })
   }

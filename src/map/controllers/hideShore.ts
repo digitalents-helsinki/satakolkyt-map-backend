@@ -9,9 +9,9 @@ import { RequestHandler } from 'express'
 export const hideShore: RequestHandler = async (req, res, next) => {
   try {
     console.log(req.params)
-const { _key } = await ShoreModel.updateShoreDocument(req.params.key, {
-    state: { status: 'hidden', data: 'x', foo: 'bar' }
-})
+    const { _key } = await ShoreModel.updateShoreDocument(req.params.key, {
+      status: 'hidden'
+    })
 
     res.send({ json: await ShoreModel.getShore(_key) })
     res.end()

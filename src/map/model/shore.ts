@@ -16,23 +16,21 @@ interface IShoreModelProperties {
 
 interface IShoreModel {
   type: 'Feature'
-  state?: {
-    status: 'reserved' | 'cleaned' | undefined
-  }
+  status?: string
   properties: IShoreModelProperties
   geometry: GeoJSON.LineString
 }
 
 export default class ShoreModel {
   /**
-   * Gets all shores that does not equal to 'reserved' in state.
+   * Gets all shores that does not equal to 'reserved' in status.
    */
   static async getFreeShores(): Promise<IShoreModel[]> {
     const cursor = await db.query(aql`
       FOR doc IN ${collection}
-        FILTER doc.state.status != 'reserved'
-        FILTER doc.state.status != 'hidden'
-        FILTER doc.state.status != 'cleaned'
+        FILTER doc.status != 'reserved'
+        FILTER doc.status != 'hidden'
+        FILTER doc.status != 'cleaned'
 
         RETURN doc
     `)
@@ -41,12 +39,12 @@ export default class ShoreModel {
   }
 
   /**
-   * Gets all shores that DOES equal to 'reserved' in state
+   * Gets all shores that DOES equal to 'reserved' in status
    */
   static async getReservedShores(): Promise<IShoreModel[]> {
     const cursor = await db.query(aql`
       FOR doc IN ${collection}
-        FILTER doc.state.status == 'reserved'
+        FILTER doc.status == 'reserved'
         RETURN doc
     `)
 
@@ -55,7 +53,7 @@ export default class ShoreModel {
   static async getHiddenShores(): Promise<IShoreModel[]> {
     const cursor = await db.query(aql`
       FOR doc IN ${collection}
-        FILTER doc.state.status == 'hidden'
+        FILTER doc.status == 'hidden'
         RETURN doc
     `)
 
@@ -63,12 +61,12 @@ export default class ShoreModel {
   }
 
   /**
-   * Gets all shores that DOES equal to 'cleaned' in state
+   * Gets all shores that DOES equal to 'cleaned' in status
    */
   static async getCleanedShores(): Promise<IShoreModel[]> {
     const cursor = await db.query(aql`
       FOR doc IN ${collection}
-        FILTER doc.state.status == 'cleaned'
+        FILTER doc.status == 'cleaned'
         return doc
     `)
 

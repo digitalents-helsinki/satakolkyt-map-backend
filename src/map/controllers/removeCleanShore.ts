@@ -5,7 +5,7 @@ import { RequestHandler } from 'express'
 export const removeCleanShore: RequestHandler = async (req, res, next) => {
   try {
     const { _key } = await ShoreModel.updateShoreDocument(req.body.key, {
-      state: { status: 'free', data: 'x', foo: 'bar' }
+      status: 'free'
     })
     const { reservation } = await CleanInfoModel.updateCleaned(req.body.clean, {
       confirm: false
