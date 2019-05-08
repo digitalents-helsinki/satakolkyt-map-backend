@@ -17,12 +17,20 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
         meta => console.log('Document saved:', meta._rev),
         err => console.error('Failed to save document:', err)
       )
-    const validationOn = true // disable validation during dev
+    const validationOn = false // disable validation during dev
     const errors = validationResult(req)
     if (!errors.isEmpty() && validationOn) {
       return res.status(422).json({ errors: errors.array() })
     }
-    res.send({ status: 'ok' })
+    //everything ok, set shore as reserved
+    const { _key } = await ShoreModel.updateShoreDocument(
+      req.body.selected.key,
+      {
+        state: { status: 'reserved' }
+      }
+    )
+
+    res.send({ json: await ShoreModel.getShore(_key), status: 'ok' })
     res.end()
   } catch (err) {
     res.send({ error: err.message })
