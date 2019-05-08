@@ -13,6 +13,7 @@ export const deleteReservation: RequestHandler = async (req, res, next) => {
     const { _key } = await ShoreModel.updateShoreDocument(req.body.key, {
       status: 'free'
     })
+    console.log('Removing reservation ' + req.body.id)
     await ReservationModel.removeReservation(req.body.id)
 
     res.send({ json: await ShoreModel.getShore(_key), status: 'ok' })

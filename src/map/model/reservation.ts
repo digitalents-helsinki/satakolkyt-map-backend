@@ -56,8 +56,7 @@ export default class ReservationModel {
     })
   }
   static async removeReservation(key: string) {
-    return
-    collection
+    return collection
       .remove(key)
       .then(
         () => console.log('Document removed'),
