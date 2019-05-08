@@ -6,7 +6,6 @@ require('dotenv-safe').config({
 const arango = require('arangojs')
 
 const { DB_USER, DB_PASS, DB_NAME, DB_URL } = process.env
-
 /**
  * Checks (rudimentally) if the given JSON is valid for the database.
  * TODO: Make the validation better.
@@ -46,6 +45,24 @@ async function populateDB({ geojson, collectionName }) {
     await collectionRef.create().catch(err => {
       if (err.code === 409) {
         console.log(`Found existing collection '${collectionName}'. `)
+        return
+      }
+
+      throw err
+    })
+    const reservations = connection.collection('reservations')
+    await reservations.create().catch(err => {
+      if (err.code === 409) {
+        console.log(`Found existing collection 'reservations'. `)
+        return
+      }
+
+      throw err
+    })
+    const shore_infos = connection.collection('shore_infos')
+    await shore_infos.create().catch(err => {
+      if (err.code === 409) {
+        console.log(`Found existing collection 'shore_infos'. `)
         return
       }
 
