@@ -57,13 +57,13 @@ router.post(
     check('confirmed').exists(),
     check('organizer').exists(),
     check(['startdate', 'enddate']).isISO8601(),
-    check('starttime').exists(),
-    check('endtime').exists(),
+    check('starttime').matches(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/),
+    check('endtime').matches(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/),
     check('openevent').exists(),
     check('openinfo').exists(),
     check('openlink').exists(),
     check('name').exists(),
-    check('email').exists(),
+    check('email').isEmail({ require_tld: false }),
     check('phonenumber').exists(),
     check('selected.key').exists(),
     check('selected').exists()
@@ -82,16 +82,20 @@ router.post(
     check('organizer_name').exists(),
     check('leader_name').exists(),
     check('leader_phone').exists(),
-    check('group_size').exists(),
-    check('trash_amount').exists(),
-    check('phonenumber').exists(),
+    check('leader_email').isEmail({ require_tld: false }),
+    check('group_size')
+      .toInt()
+      .isInt({ min: 1 }),
+    check('trash_amount')
+      .toInt()
+      .isInt({ min: 1, max: 4 }),
     check('selected.key').exists(),
     check('selected').exists(),
     check(['date']).isISO8601(),
-    check('trash_left').exists(),
+    check('trash_left').isIn(['yes', 'no']),
     check('trash_bags_info').exists(),
-    check('kurtturuusu').exists(),
-    check('jattipalsami').exists(),
+    check('kurtturuusu').isIn(['yes', 'no', 'idk']),
+    check('jattipalsami').isIn(['yes', 'no', 'idk']),
     check('foreignspeciesdetail').exists(),
     check('cleanmoreinfo').exists()
   ],

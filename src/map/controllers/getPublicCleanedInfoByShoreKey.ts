@@ -14,6 +14,7 @@ export const getPublicCleanedInfoByShoreKey: RequestHandler = async (
     cleaned.leader_name = null
     cleaned.leader_email = null
     cleaned.leader_phone = null
+    cleaned.userip = null
     res.send({ data: cleaned })
   } catch (err) {
     res.send({ error: err.message })
