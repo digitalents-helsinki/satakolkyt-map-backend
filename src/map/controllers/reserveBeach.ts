@@ -25,6 +25,19 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
 
     console.log(data)
 
+    //check if datetimes are valid (i.e start in future and before end)
+    const startstring = data.startdate + 'T' + data.starttime + ':00'
+    console.log('start: ', startstring)
+    const start = new Date(startstring)
+    const now = new Date()
+    const endstring = data.enddate + 'T' + data.endtime + ':00'
+    console.log('end: ', endstring)
+    const end = new Date(endstring)
+    if (end < start || start < now) {
+      console.log('Dates are wrong')
+      return res.status(422).send({ error: 'err_validationerror' })
+    }
+
     //check data format validation errors
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
