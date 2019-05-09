@@ -11,7 +11,8 @@
     "watch": "yarn build --watch",
     "nodemon": "nodemon --signal SIGHUP dist/index.js -q",
     "dev": "yarn run build && run-p nodemon watch",
-    "build": "tsc"
+    "build": "tsc",
+    "docker:build": "docker-compose up -f docker-compose.prod.yaml -d --build --remove-orphans"
   },
   "nodemonConfig": {
     "ignore": [

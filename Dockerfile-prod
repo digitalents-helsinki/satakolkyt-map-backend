@@ -11,4 +11,4 @@ COPY . .
 EXPOSE 8089
 RUN yarn build
 
-CMD [ "yarn", "nodemon" ]
+CMD [ "node", "dist/index.js" ]
