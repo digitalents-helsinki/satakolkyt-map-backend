@@ -18,7 +18,7 @@ import { getPublicCleanedInfoByShoreKey } from './controllers/getPublicCleanedIn
 import { confirmReservation } from './controllers/confirmReservation'
 import { cancelReservation } from './controllers/cancelReservation'
 import { hideShore } from './controllers/hideShore'
-import { cleanShore } from './controllers/cleanShore'
+import { confirmCleaned } from './controllers/confirmCleaned'
 
 import { reserveBeach } from './controllers/reserveBeach'
 import { unhideBeach } from './controllers/unhideBeach'
@@ -77,7 +77,7 @@ router.post('/cancelcleanedbeach', checkToken, removeCleanShore)
 router.post('/unhidebeach', checkToken, unhideBeach)
 router.delete('/reservation', checkToken, deleteReservation)
 router.delete('/cleanedshore', checkToken, deleteCleanedShore)
-router.post('/clean/', cleanShore)
+router.post('/clean/', confirmCleaned)
 router.post(
   '/cleaninfo',
   [

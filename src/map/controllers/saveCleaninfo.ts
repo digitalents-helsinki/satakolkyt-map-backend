@@ -34,6 +34,11 @@ export const saveCleanInfo: RequestHandler = async (req, res, next) => {
         err => console.error('Failed to save document:', err)
       )
 
+    const { _key } = await ShoreModel.updateShoreDocument(
+      req.body.selected.key,
+      { status: 'cleaned' }
+    )
+
     res.send({ json: shore, status: 'ok' })
     res.end()
   } catch (err) {
