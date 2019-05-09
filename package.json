@@ -10,8 +10,8 @@
     "docker:populate-geojson": "docker exec -it expresssatakolkyt yarn db:populate-geojson",
     "watch": "yarn build --watch",
     "nodemon": "nodemon --signal SIGHUP dist/index.js -q",
-    "dev": "docker-compose up -d --build --remove-orphans",
-    "build": "docker-compose up -f docker-compose.prod.yaml -d --build --remove-orphans"
+    "dev": "yarn run build && run-p nodemon watch",
+    "build": "tsc"
   },
   "nodemonConfig": {
     "ignore": [
