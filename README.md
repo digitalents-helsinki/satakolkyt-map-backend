@@ -10,7 +10,7 @@ Make an `.env` script to the root of the project directory with these fields.
 PORT=8089
 DB_USER='root'
 DB_PASS='root'
-DB_URL='http://127.0.0.1:8529'
+DB_URL=http://satakolkytarangodb3:8529
 DB_NAME='satakolkyt'
 ```
 
