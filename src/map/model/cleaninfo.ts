@@ -47,4 +47,13 @@ export default class CleanInfoModel {
       mergeObjects: false
     })
   }
+
+  static async removeCleaned(key: string) {
+    return collection
+      .remove(key)
+      .then(
+        () => console.log('Document removed'),
+        err => console.error('Failed to remove document', err)
+      )
+  }
 }

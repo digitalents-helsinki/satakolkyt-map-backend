@@ -30,6 +30,7 @@ import { deleteReservation } from './controllers/deleteReservation'
 
 const csrf = require('csurf')
 import { csrfToken } from './controllers/csrfToken'
+import { deleteCleanedShore } from './controllers/deleteCleanedShore'
 
 const csrfProtection = csrf({ cookie: true })
 
@@ -75,6 +76,7 @@ router.post('/cancelreservation', checkToken, cancelReservation)
 router.post('/cancelcleanedbeach', checkToken, removeCleanShore)
 router.post('/unhidebeach', checkToken, unhideBeach)
 router.delete('/reservation', checkToken, deleteReservation)
+router.delete('/cleanedshore', checkToken, deleteCleanedShore)
 router.post('/clean/', cleanShore)
 router.post(
   '/cleaninfo',
