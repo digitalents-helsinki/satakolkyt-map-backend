@@ -44,4 +44,3 @@ services:
       - ARANGO_STORAGE_ENGINE=rocksdb
     env_file:
       - .env
-networks:
