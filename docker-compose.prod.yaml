@@ -9,8 +9,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-prod
-    ports:
-      - "8089:8089"
     volumes:
       - ./:/app
     links:
@@ -31,8 +29,6 @@ services:
     ports:
       - 80:80
       - 443:443
-    networks:
-      - front
     links:
       - arangodb
       - app
@@ -43,13 +39,9 @@ services:
     restart: always
     ports:
       - 8529:8529
-    networks:
-      - front
     environment:
       - ARANGO_NO_AUTH=1
       - ARANGO_STORAGE_ENGINE=rocksdb
     env_file:
       - .env
 networks:
-  front:
-    driver: bridge

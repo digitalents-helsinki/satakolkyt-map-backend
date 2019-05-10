@@ -11,8 +11,8 @@ app.use(cookieParser())
 //cors
 app.use(
   cors({
-    origin: 'map.satakolkyt.fi',
-    credentials: true
+    origin: process.env.MAP_URL,
+    credentials: process.env.MAP_AUTH
   })
 )
 
