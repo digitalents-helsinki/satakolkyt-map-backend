@@ -4,8 +4,6 @@ services:
   app:
     container_name: expresssatakolkyt
     restart: always
-    networks:
-      - front
     build:
       context: .
       dockerfile: Dockerfile-prod
