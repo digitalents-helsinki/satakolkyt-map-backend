@@ -4,6 +4,8 @@ services:
   app:
     container_name: expresssatakolkyt
     restart: always
+    networks:
+      front
     build:
       context: .
       dockerfile: Dockerfile-prod
@@ -34,6 +36,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    networks:
+      front
     links:
       - arangodb
       - app
@@ -44,6 +48,8 @@ services:
     restart: always
     ports:
       - 8529:8529
+    networks:
+      front
     environment:
       - ARANGO_NO_AUTH=1
       - ARANGO_STORAGE_ENGINE=rocksdb
@@ -51,3 +57,6 @@ services:
       - ./arangodb_volume/:/var/lib/arangodb3/
     env_file:
       - .env
+networks:
+  front:
+    driver: bridge
