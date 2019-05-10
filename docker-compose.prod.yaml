@@ -17,11 +17,6 @@ services:
       - arangodb
     env_file:
       - .env
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - /etc/letsencrypt/:/etc/letsencrypt/
-      - /var/www/certbot/:/var/www/certbot/
   nginx:
     image: nginx:latest
     restart: always
@@ -53,8 +48,6 @@ services:
     environment:
       - ARANGO_NO_AUTH=1
       - ARANGO_STORAGE_ENGINE=rocksdb
-    volumes:
-      - ./arangodb_volume/:/var/lib/arangodb3/
     env_file:
       - .env
 networks:
