@@ -2,7 +2,7 @@ import express from 'express'
 import bodyparser from 'body-parser'
 import { router as apiRouter } from '@/api'
 import cookieParser from 'cookie-parser'
-
+import GithubWebHook from 'express-github-webhook'
 export const app = express()
 
 app.use(cookieParser())
@@ -19,7 +19,16 @@ var allowCrossDomain = function(req, res, next) {
 
   next()
 }
+var webhookHandler = GithubWebHook({
+  path: '/push',
+  secret: process.env.SECRET
+})
 app.use(allowCrossDomain)
+app.use(webhookHandler)
+webhookHandler.on('push', function(repo, data) {
+  //do something
+})
+
 // Bodyparser
 app.use(bodyparser.json()) // support json encoded bodies
 

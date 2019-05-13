@@ -378,7 +378,7 @@ braces@^2.3.1, braces@^2.3.2:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-buffer-equal-constant-time@1.0.1:
+buffer-equal-constant-time@1.0.1, buffer-equal-constant-time@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
   integrity sha1-+OcRMvf/5uAaXJaXpMbz5I1cyBk=
@@ -943,6 +943,13 @@ expand-brackets@^2.1.4:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+express-github-webhook@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/express-github-webhook/-/express-github-webhook-1.0.6.tgz#a980ca0ab88b8cbda47b94a1e918c3f0a68f4cad"
+  integrity sha1-qYDKCriLjL2ke5Sh6RjD8KaPTK0=
+  dependencies:
+    buffer-equal-constant-time "^1.0.1"
 
 express-validator@^5.3.1:
   version "5.3.1"
