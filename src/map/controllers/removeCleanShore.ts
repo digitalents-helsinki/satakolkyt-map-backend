@@ -8,10 +8,10 @@ export const removeCleanShore: RequestHandler = async (req, res, next) => {
       status: 'free'
     })
     const { reservation } = await CleanInfoModel.updateCleaned(req.body.clean, {
-      confirm: false
+      confirmed: false
     })
 
-    res.send({ json: await ShoreModel.getShore(_key), status: 'ok' })
+    res.send({ status: 'ok' })
     res.end()
   } catch (err) {
     res.send({ error: err.message })

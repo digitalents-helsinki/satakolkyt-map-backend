@@ -5,7 +5,7 @@ import { RequestHandler } from 'express'
 export const confirmCleaned: RequestHandler = async (req, res, next) => {
   try {
     const { clean } = await CleanInfoModel.updateCleaned(req.body.clean, {
-      confirm: true
+      confirmed: true
     })
 
     res.send({ status: 'ok' })
