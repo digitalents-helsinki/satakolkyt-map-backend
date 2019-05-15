@@ -2,7 +2,6 @@ import express from 'express'
 import bodyparser from 'body-parser'
 import { router as apiRouter } from '@/api'
 import cookieParser from 'cookie-parser'
-import GithubWebHook from 'express-github-webhook'
 import crypto from 'crypto'
 export const app = express()
 
@@ -38,17 +37,19 @@ const verifyGitHub = req => {
     Buffer.from(ourSignature)
   )
 }
-app.post('push', (req, res) => {
-  if (verifyGitHub(req)) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' })
-    res.end('Thanks GitHub <3')
-  }
-})
 
 app.use(allowCrossDomain)
 
 // Bodyparser
 app.use(bodyparser.json()) // support json encoded bodies
+app.post('/push', (req, res) => {
+  if (verifyGitHub(req)) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' })
+    res.end('Thanks GitHub <3')
+  } else {
+    res.end('')
+  }
+})
 
 app.use(express.static('public'))
 app.use('/api', apiRouter)

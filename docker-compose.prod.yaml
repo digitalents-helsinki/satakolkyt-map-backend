@@ -49,7 +49,7 @@ services:
       - ARANGO_NO_AUTH=1
       - ARANGO_STORAGE_ENGINE=rocksdb
     volumes:
-      - ./arangodb_volume/:/var/lib/arangodb3/
+      - /var/lib/arangodb3/:/var/lib/arangodb3/
     env_file:
       - .env
 networks:
