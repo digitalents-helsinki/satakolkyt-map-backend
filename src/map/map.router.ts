@@ -23,7 +23,7 @@ import { confirmCleaned } from './controllers/confirmCleaned'
 import { reserveBeach } from './controllers/reserveBeach'
 import { unhideBeach } from './controllers/unhideBeach'
 
-import { removeCleanShore } from './controllers/removeCleanShore'
+import { cancelCleanShore } from './controllers/cancelCleanShore'
 
 import { saveCleanInfo } from './controllers/saveCleaninfo'
 import { deleteReservation } from './controllers/deleteReservation'
@@ -73,7 +73,7 @@ router.post(
 )
 router.post('/confirmreservation', confirmReservation)
 router.post('/cancelreservation', checkToken, cancelReservation)
-router.post('/cancelcleanedbeach', checkToken, removeCleanShore)
+router.post('/cancelcleanedbeach', checkToken, cancelCleanShore)
 router.post('/unhidebeach', checkToken, unhideBeach)
 router.delete('/reservation', checkToken, deleteReservation)
 router.delete('/cleanedshore', checkToken, deleteCleanedShore)
