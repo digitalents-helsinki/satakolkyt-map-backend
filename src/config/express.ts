@@ -42,14 +42,10 @@ app.post('push', (req, res) => {
   if (verifyGitHub(req)) {
     res.writeHead(200, { 'Content-Type': 'text/plain' })
     res.end('Thanks GitHub <3')
-  } else {
-    // Someone else calling
-    notAuthorized(req, res)
   }
 })
 
 app.use(allowCrossDomain)
-app.use(webhookHandler)
 
 // Bodyparser
 app.use(bodyparser.json()) // support json encoded bodies
