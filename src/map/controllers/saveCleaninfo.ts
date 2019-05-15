@@ -22,7 +22,7 @@ export const saveCleanInfo: RequestHandler = async (req, res, next) => {
     console.log(data)
 
     const errors = validationResult(req)
-    if (!errors.isEmpty()) {
+    if (!errors.isEmpty() || data.confirmed !== false) {
       console.log(errors.array())
       return res.status(422).send({ error: 'err_validationerror' })
     }

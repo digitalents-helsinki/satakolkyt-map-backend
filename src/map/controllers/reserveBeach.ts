@@ -40,7 +40,7 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
 
     //check data format validation errors
     const errors = validationResult(req)
-    if (!errors.isEmpty()) {
+    if (!errors.isEmpty() || data.confirmed !== false) {
       console.log(errors.array())
       //422: Unprocessable Entity
       return res.status(422).send({ error: 'err_validationerror' })

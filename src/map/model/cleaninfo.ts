@@ -7,6 +7,7 @@ interface ICleanInfoModel {
   _key?: string
   _id?: string
   _rev?: string
+  confirmed?: boolean
   date?: string
   organizer_name?: string
   leader_name?: string
