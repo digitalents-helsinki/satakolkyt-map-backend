@@ -3,6 +3,7 @@ import bodyparser from 'body-parser'
 import { router as apiRouter } from '@/api'
 import cookieParser from 'cookie-parser'
 import GithubWebHook from 'express-github-webhook'
+import crypto from 'crypto'
 export const app = express()
 
 app.use(cookieParser())
@@ -19,15 +20,36 @@ var allowCrossDomain = function(req, res, next) {
 
   next()
 }
-var webhookHandler = GithubWebHook({
-  path: '/push',
-  secret: process.env.SECRET
+const verifyGitHub = req => {
+  if (!req.headers['user-agent'].includes('GitHub-Hookshot')) {
+    return false
+  }
+  // Compare their hmac signature to our hmac signature
+  // (hmac = hash-based message authentication code)
+  const theirSignature = req.headers['x-hub-signature']
+  const payload = JSON.stringify(req.body)
+  const secret = process.env.SECRET // TODO: Replace me
+  const ourSignature = `sha1=${crypto
+    .createHmac('sha1', secret)
+    .update(payload)
+    .digest('hex')}`
+  return crypto.timingSafeEqual(
+    Buffer.from(theirSignature),
+    Buffer.from(ourSignature)
+  )
+}
+app.post('push', (req, res) => {
+  if (verifyGitHub(req)) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' })
+    res.end('Thanks GitHub <3')
+  } else {
+    // Someone else calling
+    notAuthorized(req, res)
+  }
 })
+
 app.use(allowCrossDomain)
 app.use(webhookHandler)
-webhookHandler.on('push', function(repo, data) {
-  //do something
-})
 
 // Bodyparser
 app.use(bodyparser.json()) // support json encoded bodies
