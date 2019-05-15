@@ -2,7 +2,6 @@ import express from 'express'
 import bodyparser from 'body-parser'
 import { router as apiRouter } from '@/api'
 import cookieParser from 'cookie-parser'
-import GithubWebHook from 'express-github-webhook'
 import crypto from 'crypto'
 export const app = express()
 
