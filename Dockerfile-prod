@@ -9,6 +9,6 @@ RUN yarn
 COPY . .
 
 EXPOSE 8089
-RUN yarn build
+RUN sleep 60;yarn build
 
 CMD [ "node", "dist/index.js" ]
