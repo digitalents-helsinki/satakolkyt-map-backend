@@ -59,10 +59,10 @@ async function populateDB({ geojson, collectionName }) {
 
       throw err
     })
-    const shore_infos = connection.collection('shore_infos')
-    await shore_infos.create().catch(err => {
+    const cleaninfos = connection.collection('cleaninfos')
+    await cleaninfos.create().catch(err => {
       if (err.code === 409) {
-        console.log(`Found existing collection 'shore_infos'. `)
+        console.log(`Found existing collection 'cleaninfos'. `)
         return
       }
 
