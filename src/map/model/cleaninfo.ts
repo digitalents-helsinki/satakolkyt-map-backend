@@ -33,6 +33,10 @@ export default class CleanInfoModel {
     return cursor.all()
   }
 
+  static async getCleanedByKey(key: string): Promise<ICleanInfoModel> {
+    return collection.document(key)
+  }
+
   static async getCleanedByShoreKey(key: string): Promise<ICleanInfoModel> {
     const cursor = await db.query(aql`
       FOR doc IN ${collection}

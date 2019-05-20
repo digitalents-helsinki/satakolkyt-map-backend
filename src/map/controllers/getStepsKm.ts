@@ -3,7 +3,8 @@ import { RequestHandler } from 'express'
 
 export const getStepsKm: RequestHandler = async (req, res, next) => {
   try {
-    res.send({ data: await StepsKmModel.getStepsKmInfo() })
+    const stepskm = await StepsKmModel.getStepsKmInfo()
+    res.send({ steps: stepskm.steps, km: parseFloat(stepskm.km.toFixed(1)) })
   } catch (err) {
     res.send({ error: err.message })
   }
