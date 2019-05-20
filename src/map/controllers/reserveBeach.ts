@@ -56,7 +56,7 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
     //and set the shore status to reserved
     const { _key } = await ShoreModel.updateShoreDocument(
       req.body.selected.key,
-      { status: 'reserved' }
+      { status: 'reserved', hasReservation: true }
     )
 
     res.send({ json: shore, status: 'ok' })

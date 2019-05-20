@@ -10,8 +10,10 @@ import { RequestHandler } from 'express'
  */
 export const deleteReservation: RequestHandler = async (req, res, next) => {
   try {
+    const shore = await ShoreModel.getShore(req.body.key)
     const { _key } = await ShoreModel.updateShoreDocument(req.body.key, {
-      status: 'free'
+      status: shore.status === 'cleaned' ? 'cleaned' : 'free',
+      hasReservation: false
     })
     console.log('Removing reservation ' + req.body.id)
     await ReservationModel.removeReservation(req.body.id)

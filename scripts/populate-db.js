@@ -96,7 +96,8 @@ async function populateDB({ geojson, collectionName }) {
 
     // Populate the collection with the given geojson
     for (let obj of geojson) {
-      const savedDocuments = await collectionRef.save(obj)
+      const extended = { status: 'free', hasReservation: false, ...obj }
+      const savedDocuments = await collectionRef.save(extended)
     }
 
     console.log('Done!')

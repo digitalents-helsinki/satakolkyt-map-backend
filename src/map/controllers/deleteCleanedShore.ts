@@ -7,8 +7,9 @@ import { RequestHandler } from 'express'
  */
 export const deleteCleanedShore: RequestHandler = async (req, res, next) => {
   try {
+    const shore = await ShoreModel.getShore(req.body.key)
     const { _key } = await ShoreModel.updateShoreDocument(req.body.key, {
-      status: 'free'
+      status: shore.hasReservation ? 'reserved' : 'free'
     })
     console.log('Removing cleaned shore ' + req.body.id)
     await CleanInfoModel.removeCleaned(req.body.id)

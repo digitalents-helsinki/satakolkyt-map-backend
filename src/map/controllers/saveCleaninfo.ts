@@ -10,8 +10,11 @@ export const saveCleanInfo: RequestHandler = async (req, res, next) => {
 
     //check if this piece of shore is actually available
     const shore = await ShoreModel.getShore(data.selected.key)
-    if (shore.status && shore.status !== 'free') {
-      //reserved shores not cleanable for now
+    if (
+      shore.status &&
+      shore.status !== 'free' &&
+      shore.status !== 'reserved'
+    ) {
       //409: Conflict (should this be used?)
       console.log('Shore unavailable')
       return res.status(409).send({ error: 'err_shoreunavailable' })

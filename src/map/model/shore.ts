@@ -4,14 +4,6 @@ import { db } from '@/config/arangodb'
 const collection = db.collection('geojson_features')
 
 interface IShoreModelProperties {
-  /*'gml:id'?: string
-  'hel:id'?: number
-  'hel:vastuu_org'?: string
-  'hel:selite'?: string
-  'hel:muokattu'?: string
-  'hel:html_color'?: string
-  'hel:paivitetty_tietopalveluun'?: string
-  'dt:lastcleaned': number*/
   id?: number
   length?: number
 }
@@ -19,6 +11,7 @@ interface IShoreModelProperties {
 interface IShoreModel {
   type: 'Feature'
   status?: string
+  hasReservation?: boolean
   properties: IShoreModelProperties
   geometry: GeoJSON.LineString
 }
