@@ -8,6 +8,8 @@ import { getReservedShores } from './controllers/getReservedShores'
 import { getCleanedShores } from './controllers/getCleanedShores'
 import { getHiddenShores } from './controllers/getHiddenShores'
 
+import { getStepsKm } from './controllers/getStepsKm'
+
 import { getReservations } from './controllers/getReservations'
 import { getCleanInfos } from './controllers/getCleaninfos'
 import { getShore } from './controllers/getShore'
@@ -47,6 +49,8 @@ router.get('/shores/cleaned', getCleanedShores)
 
 router.get('/reservations/', checkToken, getReservations)
 router.get('/cleaninfos/', checkToken, getCleanInfos)
+
+router.get('/stepskm/', getStepsKm)
 
 router.get('/reservedinfo/:key', getPublicReservedInfoByShoreKey)
 router.get('/cleanedinfo/:key', getPublicCleanedInfoByShoreKey)

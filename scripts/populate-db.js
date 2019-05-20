@@ -68,15 +68,17 @@ async function populateDB({ geojson, collectionName }) {
 
       throw err
     })
-    const misc = connection.collection('misc')
-    await misc.create().catch(err => {
+    const stepskm = connection.collection('steps_km_info')
+    await stepskm.create().catch(err => {
       if (err.code === 409) {
-        console.log(`Found existing collection 'misc'. `)
+        console.log(`Found existing collection 'steps_km_info'. `)
         return
       }
 
       throw err
     })
+    //create the data document
+    stepskm.save({ steps: 0, km: 0 })
 
     // Check if the collection is already populated. If so, throw error and abort.
     const collectionDocumentsRef = await collectionRef.list()
