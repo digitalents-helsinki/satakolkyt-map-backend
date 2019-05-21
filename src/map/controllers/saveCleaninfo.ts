@@ -24,6 +24,14 @@ export const saveCleanInfo: RequestHandler = async (req, res, next) => {
 
     console.log(data)
 
+    //check if datetimes are valid (i.e date is in the past)
+    const datestring = data.date + 'T00:00:00'
+    const date = new Date(datestring)
+    const now = new Date()
+    if (date > now) {
+      return res.status(422).send({ error: 'err_validationerror' })
+    }
+
     const errors = validationResult(req)
     if (!errors.isEmpty() || data.confirmed !== false) {
       console.log(errors.array())
