@@ -8,13 +8,13 @@ import { RequestHandler } from 'express'
  */
 export const deleteCleanedShore: RequestHandler = async (req, res, next) => {
   try {
-    const shore = await ShoreModel.getShore(req.body.key)
+    const shore = await ShoreModel.getShore(req.body.shorekey)
 
-    const { _key } = await ShoreModel.updateShoreDocument(req.body.key, {
+    const { _key } = await ShoreModel.updateShoreDocument(req.body.shorekey, {
       status: shore.hasReservation ? 'reserved' : 'free'
     })
 
-    const cleaninfo = await CleanInfoModel.getCleanedByKey(req.body.id)
+    const cleaninfo = await CleanInfoModel.getCleanedByKey(req.body.cleankey)
     if (cleaninfo.confirmed) {
       const stepskm = await StepsKmModel.getStepsKmInfo()
       const newsteps =
@@ -24,8 +24,8 @@ export const deleteCleanedShore: RequestHandler = async (req, res, next) => {
       StepsKmModel.updateStepsKmInfo(newsteps, newkm)
     }
 
-    console.log('Removing cleaned shore ' + req.body.id)
-    await CleanInfoModel.removeCleaned(req.body.id)
+    console.log('Removing cleaned shore ' + req.body.cleankey)
+    await CleanInfoModel.removeCleaned(req.body.cleankey)
 
     res.send({ json: await ShoreModel.getShore(_key), status: 'ok' })
     res.end()
