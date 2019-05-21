@@ -15,7 +15,16 @@ export const getPublicCleanedInfoByShoreKey: RequestHandler = async (
     cleaned.leader_email = null
     cleaned.leader_phone = null
     cleaned.userip = null
-    res.send({ data: cleaned })
+
+    //if not confirmed, don't send any real info
+    const data = cleaned.confirmed
+      ? cleaned
+      : {
+          _key: cleaned._key,
+          confirmed: false,
+          selected: { key: cleaned.selected.key }
+        }
+    res.send({ data: data })
   } catch (err) {
     res.send({ error: err.message })
   }

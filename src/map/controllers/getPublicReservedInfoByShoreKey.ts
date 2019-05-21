@@ -15,7 +15,17 @@ export const getPublicReservedInfoByShoreKey: RequestHandler = async (
     reserv.email = null
     reserv.phonenumber = null
     reserv.userip = null
-    res.send({ data: reserv })
+
+    //if not confirmed, don't send any real info
+    const data = reserv.confirmed
+      ? reserv
+      : {
+          _key: reserv._key,
+          confirmed: false,
+          selected: { key: reserv.selected.key }
+        }
+
+    res.send({ data: data })
   } catch (err) {
     res.send({ error: err.message })
   }
