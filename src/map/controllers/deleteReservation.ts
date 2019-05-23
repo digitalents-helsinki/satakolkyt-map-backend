@@ -5,9 +5,6 @@ import { aql } from 'arangojs'
 import { db } from '@/config/arangodb'
 import { RequestHandler } from 'express'
 
-/**
- * Returns all geosjon feature objects from the db collection.
- */
 export const deleteReservation: RequestHandler = async (req, res, next) => {
   try {
     const shore = await ShoreModel.getShore(req.body.shorekey)
