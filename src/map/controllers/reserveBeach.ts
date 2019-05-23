@@ -29,9 +29,9 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
     const startstring = data.startdate + 'T' + data.starttime + ':00'
     const start = new Date(startstring)
     const now = new Date()
-    //const endstring = data.enddate + 'T' + data.endtime + ':00'
-    //const end = new Date(endstring)
-    if (/*end < start ||*/ start < now) {
+    const endstring = data.startdate + 'T' + data.endtime + ':00'
+    const end = new Date(endstring)
+    if (end < start || start < now) {
       return res.status(422).send({ error: 'err_validationerror' })
     }
 
