@@ -61,7 +61,7 @@ router.post(
   [
     check('confirmed').exists(),
     check('organizer').exists(),
-    check(['startdate', 'enddate']).isISO8601(),
+    check(/*[*/ 'startdate' /*, 'enddate']*/).isISO8601(),
     check('starttime').matches(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/),
     check('endtime').matches(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/),
     check('openevent').exists(),

@@ -11,7 +11,7 @@ interface IReservationModel {
   organizer?: string
   startdate?: string
   starttime?: string
-  enddate?: string
+  //enddate?: string
   endtime?: string
   openevent?: boolean
   openinfo?: string
