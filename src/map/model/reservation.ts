@@ -21,6 +21,7 @@ interface IReservationModel {
   phonenumber?: string
   email?: string
   userip?: string
+  timestamp?: string
 }
 
 export default class ReservationModel {

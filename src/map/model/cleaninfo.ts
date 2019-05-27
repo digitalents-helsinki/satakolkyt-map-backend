@@ -21,6 +21,8 @@ interface ICleanInfoModel {
   jattipalsami?: string
   foreignspeciesdetail?: string
   cleanmoreinfo?: string
+  userip?: string
+  timestamp?: string
 }
 
 export default class CleanInfoModel {

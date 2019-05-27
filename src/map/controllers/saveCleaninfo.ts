@@ -38,6 +38,9 @@ export const saveCleanInfo: RequestHandler = async (req, res, next) => {
       return res.status(422).send({ error: 'err_validationerror' })
     }
 
+    //add timestamp
+    data.timestamp = new Date().toISOString()
+
     collection
       .save(data)
       .then(

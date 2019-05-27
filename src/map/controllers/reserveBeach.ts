@@ -43,6 +43,9 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
       return res.status(422).send({ error: 'err_validationerror' })
     }
 
+    //add timestamp
+    data.timestamp = new Date().toISOString()
+
     //everything ok, save reservation to db
     collection
       .save(data)
