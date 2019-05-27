@@ -2,7 +2,13 @@
   "name": "satakolkyt-map-backend",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "license": "MIT",
+  "private": true,
+  "author": "Digitalents Helsinki",
+  "contributors": [
+    "Omar Benchbana",
+    "Samu Suvanto",
+    "Vesa Meriläinen <vesa.merilainen@digitalentshelsinki.fi>"
+  ],
   "scripts": {
     "db:start": "./start.sh satakolkyt",
     "db:populate-geojson": "node ./scripts/populate-db.js",

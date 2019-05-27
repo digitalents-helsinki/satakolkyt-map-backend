@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import { db } from '@/config/arangodb'
 import { RequestHandler } from 'express'
 import ShoreModel from '../model/shore'

@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import { RequestHandler } from 'express'
 
 /* eslint-disable  */

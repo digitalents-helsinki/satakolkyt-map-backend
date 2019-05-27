@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import 'module-alias/register'
 import './env'
 import { connect } from './config/arangodb'

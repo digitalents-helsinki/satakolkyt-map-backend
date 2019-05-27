@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import ShoreModel from '../model/shore'
 import CleanInfoModel from '../model/cleaninfo'
 import StepsKmModel from '../model/steps_km_info'

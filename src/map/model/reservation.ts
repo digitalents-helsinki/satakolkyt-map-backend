@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import { aql } from 'arangojs'
 import { db } from '@/config/arangodb'
 

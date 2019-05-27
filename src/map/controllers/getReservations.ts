@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import ReservationModel from '../model/reservation'
 import { RequestHandler } from 'express'
 

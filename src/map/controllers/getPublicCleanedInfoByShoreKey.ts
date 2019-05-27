@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import CleanInfoModel from '../model/cleaninfo'
 import { RequestHandler } from 'express'
 
