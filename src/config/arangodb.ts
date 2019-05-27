@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import { Database, aql } from 'arangojs'
 import { config } from './index'
 
@@ -5,7 +7,7 @@ const connectionConfig = {
   username: config.arangodb.username,
   password: config.arangodb.password,
   database: config.arangodb.database,
-  url: config.arangodb.url  
+  url: config.arangodb.url
 }
 
 export const db = new Database({ url: connectionConfig.url })

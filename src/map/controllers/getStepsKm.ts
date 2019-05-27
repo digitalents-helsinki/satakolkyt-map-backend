@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import StepsKmModel from '../model/steps_km_info'
 import { RequestHandler } from 'express'
 

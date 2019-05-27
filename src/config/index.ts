@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 export const config = {
   port: process.env.PORT,
   arangodb: {

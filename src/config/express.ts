@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import express from 'express'
 import bodyparser from 'body-parser'
 import { router as apiRouter } from '@/api'

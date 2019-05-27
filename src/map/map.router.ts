@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import { Router } from 'express'
 
 import { login } from '../login'

@@ -1,3 +1,5 @@
+// Copyright (C) 2019 Digitalents Helsinki
+
 import ShoreModel from '../model/shore'
 import { RequestHandler } from 'express'
 
