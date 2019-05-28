@@ -11,15 +11,14 @@ export const deleteOldReservations: RequestHandler = async (req, res, next) => {
   try {
     console.log('Removing old reservations...')
     const reservs = await ReservationModel.getReservations()
-    let num = 0
+    let shores = []
     for (let r of reservs) {
       if (isOld(r.startdate, r.endtime)) {
-        await deleteReservation(r)
-        num++
+        shores.push(await deleteReservation(r))
       }
     }
 
-    res.send({ removeCount: num, status: 'ok' })
+    res.send({ shores: shores, status: 'ok' })
     res.end()
   } catch (err) {
     res.send({ error: err.message })
@@ -34,6 +33,7 @@ async function deleteReservation(reserv) {
   })
   console.log('Removing reservation ' + reserv._key)
   await ReservationModel.removeReservation(reserv._key)
+  return shore
 }
 
 function isOld(date: string, time: string): Boolean {

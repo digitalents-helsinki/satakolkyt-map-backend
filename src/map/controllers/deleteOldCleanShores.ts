@@ -12,15 +12,14 @@ export const deleteOldCleanShores: RequestHandler = async (req, res, next) => {
   try {
     console.log('Removing old reservations...')
     const cleans = await CleanInfoModel.getCleanInfos()
-    let num = 0
+    let shores = []
     for (let c of cleans) {
       if (isOld(c.date)) {
-        await deleteCleaninfo(c)
-        num++
+        shores.push(await deleteCleaninfo(c))
       }
     }
 
-    res.send({ removeCount: num, status: 'ok' })
+    res.send({ shores: shores, status: 'ok' })
     res.end()
   } catch (err) {
     res.send({ error: err.message })
@@ -45,6 +44,7 @@ async function deleteCleaninfo(clean) {
 
   console.log('Removing cleaned shore ' + clean._key)
   await CleanInfoModel.removeCleaned(clean._key)
+  return shore
 }
 
 function isOld(date: string): Boolean {
