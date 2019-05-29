@@ -108,7 +108,6 @@ router.post(
     check('trash_bags_info').exists(),
     check('kurtturuusu').isIn(['yes', 'no', 'idk']),
     check('jattipalsami').isIn(['yes', 'no', 'idk']),
-    check('foreignspeciesdetail').exists(),
     check('cleanmoreinfo').exists()
   ],
   saveCleanInfo
