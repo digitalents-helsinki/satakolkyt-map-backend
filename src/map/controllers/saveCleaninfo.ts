@@ -43,6 +43,9 @@ export const saveCleanInfo: RequestHandler = async (req, res, next) => {
     //add timestamp
     data.timestamp = new Date().toISOString()
 
+    //not archived yet
+    data.archived = false
+
     collection
       .save(data)
       .then(

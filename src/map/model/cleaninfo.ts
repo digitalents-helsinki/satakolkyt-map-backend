@@ -21,16 +21,19 @@ interface ICleanInfoModel {
   trash_bags_info?: string
   kurtturuusu?: string
   jattipalsami?: string
-  foreignspeciesdetail?: string
+  kurtturuusu_detail?: string
+  jattipalsami_detail?: string
   cleanmoreinfo?: string
   userip?: string
   timestamp?: string
+  archived?: boolean
 }
 
 export default class CleanInfoModel {
   static async getCleanInfos(): Promise<ICleanInfoModel[]> {
     const cursor = await db.query(aql`
       FOR doc IN ${collection}
+        FILTER doc.archived == false
         RETURN doc
     `)
 

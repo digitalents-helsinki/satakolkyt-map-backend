@@ -8,14 +8,14 @@ import { aql } from 'arangojs'
 import { db } from '@/config/arangodb'
 import { RequestHandler } from 'express'
 
-export const deleteOldCleanShores: RequestHandler = async (req, res, next) => {
+export const archiveOldCleanShores: RequestHandler = async (req, res, next) => {
   try {
-    console.log('Removing old reservations...')
+    console.log('Archiving old cleanings...')
     const cleans = await CleanInfoModel.getCleanInfos()
     let shores = []
     for (let c of cleans) {
       if (isOld(c.date)) {
-        shores.push(await deleteCleaninfo(c))
+        shores.push(await archiveCleaninfo(c))
       }
     }
 
@@ -26,24 +26,25 @@ export const deleteOldCleanShores: RequestHandler = async (req, res, next) => {
   }
 }
 
-async function deleteCleaninfo(clean) {
+async function archiveCleaninfo(clean) {
   const shore = await ShoreModel.getShore(clean.selected.key)
 
   const { _key } = await ShoreModel.updateShoreDocument(clean.selected.key, {
     status: shore.hasReservation ? 'reserved' : 'free'
   })
 
-  if (clean.confirmed) {
+  // Shouldn't be undoing counter steps/km after all
+  /*if (clean.confirmed) {
     const stepskm = await StepsKmModel.getStepsKmInfo()
     const newsteps =
       stepskm.steps -
       Math.floor(clean.group_size * (shore.properties.length / 0.6))
     const newkm = stepskm.km - shore.properties.length / 1000
     StepsKmModel.updateStepsKmInfo(newsteps, newkm)
-  }
+  }*/
 
-  console.log('Removing cleaned shore ' + clean._key)
-  await CleanInfoModel.removeCleaned(clean._key)
+  console.log('Archiving cleaned shore ' + clean._key)
+  await CleanInfoModel.updateCleaned(clean._key, { archived: true })
   return shore
 }
 

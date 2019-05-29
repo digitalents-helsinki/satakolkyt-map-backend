@@ -32,7 +32,7 @@ import { cancelCleanShore } from './controllers/cancelCleanShore'
 import { saveCleanInfo } from './controllers/saveCleaninfo'
 import { deleteReservation } from './controllers/deleteReservation'
 import { deleteOldReservations } from './controllers/deleteOldReservations'
-import { deleteOldCleanShores } from './controllers/deleteOldCleanShores'
+import { archiveOldCleanShores } from './controllers/archiveOldCleanShores'
 
 const csrf = require('csurf')
 import { csrfToken } from './controllers/csrfToken'
@@ -65,7 +65,7 @@ router.post(
   [
     check('confirmed').exists(),
     check('organizer').exists(),
-    check(/*[*/ 'startdate' /*, 'enddate']*/).isISO8601(),
+    check('startdate').isISO8601(),
     check('starttime').matches(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/),
     check('endtime').matches(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/),
     check('openevent').exists(),
@@ -86,7 +86,7 @@ router.post('/unhidebeach', checkToken, unhideBeach)
 router.delete('/reservation', checkToken, deleteReservation)
 router.delete('/cleanedshore', checkToken, deleteCleanedShore)
 router.delete('/removeoldreservations', checkToken, deleteOldReservations)
-router.delete('/removeoldcleaninfos', checkToken, deleteOldCleanShores)
+router.delete('/removeoldcleaninfos', checkToken, archiveOldCleanShores)
 router.post('/clean/', confirmCleaned)
 router.post(
   '/cleaninfo',
@@ -103,11 +103,13 @@ router.post(
       .isInt({ min: 1, max: 4 }),
     check('selected.key').exists(),
     check('selected').exists(),
-    check(['date']).isISO8601(),
+    check('date').isISO8601(),
     check('trash_left').isIn(['yes', 'no']),
     check('trash_bags_info').exists(),
     check('kurtturuusu').isIn(['yes', 'no', 'idk']),
     check('jattipalsami').isIn(['yes', 'no', 'idk']),
+    check('kurtturuusu_detail').exists(),
+    check('jattipalsami_detail').exists(),
     check('cleanmoreinfo').exists()
   ],
   saveCleanInfo
