@@ -10,11 +10,11 @@ import { RequestHandler } from 'express'
 
 export const archiveOldCleanShores: RequestHandler = async (req, res, next) => {
   try {
-    console.log('Archiving old cleanings...')
+    console.log('Archiving old confirmed cleanings...')
     const cleans = await CleanInfoModel.getCleanInfos()
     let shores = []
     for (let c of cleans) {
-      if (isOld(c.date)) {
+      if (c.confirmed && isOld(c.date)) {
         shores.push(await archiveCleaninfo(c))
       }
     }

@@ -8,7 +8,10 @@ import { RequestHandler } from 'express'
 export const confirmCleaned: RequestHandler = async (req, res, next) => {
   try {
     const { clean } = await CleanInfoModel.updateCleaned(req.body.clean, {
-      confirmed: true
+      confirmed: true,
+      leader_name: '---',
+      leader_email: '---',
+      leader_phone: '---'
     })
 
     const cleaninfo = await CleanInfoModel.getCleanedByKey(req.body.clean)
