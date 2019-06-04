@@ -1,0 +1,57 @@
+version: "3.3"
+
+services:
+  app:
+    container_name: expresssatakolkyt
+    restart: always
+    networks:
+      - front
+    build:
+      context: .
+      dockerfile: Dockerfile-prod
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./:/app
+    links:
+      - arangodb
+    env_file:
+      - .env
+  nginx:
+    image: nginx:latest
+    restart: always
+    container_name: production_nginx
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt/:/etc/letsencrypt/
+      - /var/www/certbot/:/var/www/certbot/
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - front
+    links:
+      - arangodb
+      - app
+
+  arangodb:
+    container_name: satakolkytarangodb3
+    image: arangodb/arangodb
+    restart: always
+    ports:
+      - 8529:8529
+    networks:
+      - front
+    environment:
+      - ARANGO_NO_AUTH=1
+      - ARANGO_STORAGE_ENGINE=rocksdb
+    volumes:
+      - /var/lib/arangodb3/:/var/lib/arangodb3/
+    env_file:
+      - .env
+networks:
+  front:
+    driver: bridge

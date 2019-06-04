@@ -1,0 +1,23 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "Sammakkoranta 1",
+    "state": [
+      "needs_maintanance",
+      "Kaivataan apua"
+    ]
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        24.88279256242609,
+        60.19267608960577
+      ],
+      [
+        24.88328690268134,
+        60.19281165048346
+      ]
+    ]
+  }
+}
