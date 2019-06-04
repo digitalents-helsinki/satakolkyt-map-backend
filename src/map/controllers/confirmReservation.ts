@@ -7,6 +7,8 @@ import { aql } from 'arangojs'
 import { db } from '@/config/arangodb'
 import { RequestHandler } from 'express'
 
+import { sendMail } from '../../mail'
+
 /**
  * Returns all geosjon feature objects from the db collection.
  */
@@ -18,9 +20,12 @@ export const confirmReservation: RequestHandler = async (req, res, next) => {
         confirmed: true
       }
     )
-
     res.send({ status: 'ok' })
     res.end()
+
+    const reserv = await ReservationModel.getReservation(req.body.reservation)
+
+    sendMail(reserv.email, 'test', 'reservation confirmed')
   } catch (err) {
     res.send({ error: err.message })
   }
