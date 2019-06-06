@@ -27,6 +27,8 @@ interface ICleanInfoModel {
   userip?: string
   timestamp?: string
   archived?: boolean
+  multiID?: string
+  conf_email_sent?: boolean
 }
 
 export default class CleanInfoModel {
@@ -58,6 +60,14 @@ export default class CleanInfoModel {
     return collection.update(key, data, {
       mergeObjects: false
     })
+  }
+
+  static async updateEmailedByMultiID(multiID: string) {
+    db.query(aql`
+      FOR doc IN ${collection}
+        FILTER doc.multiID == ${multiID}
+        UPDATE {_key: doc._key, conf_email_sent: true} IN ${collection}
+    `)
   }
 
   static async removeCleaned(key: string) {

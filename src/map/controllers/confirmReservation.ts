@@ -25,7 +25,10 @@ export const confirmReservation: RequestHandler = async (req, res, next) => {
 
     const reserv = await ReservationModel.getReservation(req.body.reservation)
 
-    sendMail(reserv.email, 'test', 'reservation confirmed')
+    if (!reserv.conf_email_sent) {
+      sendMail(reserv.email, 'test', 'reservation confirmed')
+      ReservationModel.updateEmailedByMultiID(reserv.multiID)
+    }
   } catch (err) {
     res.send({ error: err.message })
   }

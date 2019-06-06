@@ -48,6 +48,9 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
     //add timestamp
     data.timestamp = new Date().toISOString()
 
+    //confirmation email not yet sent
+    data.conf_email_sent = false
+
     //everything ok, save reservation to db
     collection
       .save(data)

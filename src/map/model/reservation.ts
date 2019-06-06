@@ -13,7 +13,6 @@ interface IReservationModel {
   organizer?: string
   startdate?: string
   starttime?: string
-  //enddate?: string
   endtime?: string
   openevent?: boolean
   openinfo?: string
@@ -24,6 +23,8 @@ interface IReservationModel {
   email?: string
   userip?: string
   timestamp?: string
+  multiID?: string
+  conf_email_sent?: boolean
 }
 
 export default class ReservationModel {
@@ -58,6 +59,15 @@ export default class ReservationModel {
       mergeObjects: false
     })
   }
+
+  static async updateEmailedByMultiID(multiID: string) {
+    db.query(aql`
+      FOR doc IN ${collection}
+        FILTER doc.multiID == ${multiID}
+        UPDATE {_key: doc._key, conf_email_sent: true} IN ${collection}
+    `)
+  }
+
   static async removeReservation(key: string) {
     return collection
       .remove(key)

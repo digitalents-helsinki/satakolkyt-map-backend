@@ -27,11 +27,14 @@ export const confirmCleaned: RequestHandler = async (req, res, next) => {
     res.send({ status: 'ok' })
     res.end()
 
-    sendMail(
-      cleaninfo.leader_email,
-      'Siivouksenne on vahvistettu',
-      'Siivouksenne on nyt vahvistettu. SATAKOLKYT kiittää! Henkilötietonne on poistettu järjestelmästä.'
-    )
+    if (!cleaninfo.conf_email_sent) {
+      sendMail(
+        cleaninfo.leader_email,
+        'Siivouksenne on vahvistettu',
+        'Siivouksenne on nyt vahvistettu. SATAKOLKYT kiittää! Henkilötietonne on poistettu järjestelmästä.'
+      )
+      CleanInfoModel.updateEmailedByMultiID(cleaninfo.multiID)
+    }
   } catch (err) {
     res.send({ error: err.message })
   }
