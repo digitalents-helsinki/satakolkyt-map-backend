@@ -43,7 +43,6 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
-    "@sentry/node": "^5.1.0",
     "arangojs": "^6.10.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
