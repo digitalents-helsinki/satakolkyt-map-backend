@@ -50,7 +50,7 @@ async function archiveCleaninfo(clean) {
 
 function isOld(date: string): Boolean {
   const cleaned = new Date(date + 'T00:00:00')
-  const twomonthsago = new Date()
-  twomonthsago.setMonth(twomonthsago.getMonth() - 2)
-  return cleaned < twomonthsago
+  const threemonthsago = new Date()
+  threemonthsago.setMonth(threemonthsago.getMonth() - 3)
+  return cleaned < threemonthsago
 }
