@@ -52,6 +52,9 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
     //confirmation email not yet sent
     data.conf_email_sent = false
 
+    //reminder email not yet sent
+    data.reminder_email_sent = false
+
     //everything ok, save reservation to db
     collection
       .save(data)
