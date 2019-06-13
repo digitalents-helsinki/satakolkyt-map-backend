@@ -6,6 +6,7 @@ import { db } from '@/config/arangodb'
 import { RequestHandler } from 'express'
 const { validationResult } = require('express-validator/check')
 const collection = db.collection('reservations')
+import { sendMail } from '../../mail'
 
 /**
  * Returns all geosjon feature objects from the db collection.
@@ -66,6 +67,8 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
 
     res.send({ json: shore, status: 'ok' })
     res.end()
+
+    sendMail(process.env.ADMIN_EMAIL, 'Satakolkyt', 'Uusi varaus')
   } catch (err) {
     res.send({ error: err.message })
   }

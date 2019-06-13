@@ -5,6 +5,7 @@ import { RequestHandler } from 'express'
 import ShoreModel from '../model/shore'
 const collection = db.collection('cleaninfos')
 const { validationResult } = require('express-validator/check')
+import { sendMail } from '../../mail'
 
 export const saveCleanInfo: RequestHandler = async (req, res, next) => {
   try {
@@ -64,6 +65,8 @@ export const saveCleanInfo: RequestHandler = async (req, res, next) => {
 
     res.send({ json: shore, status: 'ok' })
     res.end()
+
+    sendMail(process.env.ADMIN_EMAIL, 'Satakolkyt', 'Uusi siivousilmoitus')
   } catch (err) {
     res.send({ error: err.message })
   }
