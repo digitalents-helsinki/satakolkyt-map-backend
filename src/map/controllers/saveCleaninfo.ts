@@ -47,7 +47,8 @@ export const saveCleanInfo: RequestHandler = async (req, res, next) => {
     data.archived = false
 
     //confirmation email not sent yet
-    data.conf_email_sent = false
+    //obsolete for now
+    //data.conf_email_sent = false
 
     collection
       .save(data)
