@@ -26,6 +26,7 @@ interface IReservationModel {
   multiID?: string
   conf_email_sent?: boolean
   reminder_email_sent?: boolean
+  notify_email_sent?: boolean
 }
 
 export default class ReservationModel {
@@ -74,6 +75,14 @@ export default class ReservationModel {
       FOR doc IN ${collection}
         FILTER doc.multiID == ${multiID}
         UPDATE {_key: doc._key, reminder_email_sent: true} IN ${collection}
+    `)
+  }
+
+  static async updateNotifiedByMultiID(multiID: string) {
+    db.query(aql`
+      FOR doc IN ${collection}
+        FILTER doc.multiID == ${multiID}
+        UPDATE {_key: doc._key, notify_email_sent: true} IN ${collection}
     `)
   }
 

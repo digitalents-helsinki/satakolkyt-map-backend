@@ -7,6 +7,7 @@ import { RequestHandler } from 'express'
 const { validationResult } = require('express-validator/check')
 const collection = db.collection('reservations')
 import { sendMail } from '../../mail'
+import ReservationModel from '../model/reservation'
 
 /**
  * Returns all geosjon feature objects from the db collection.
@@ -25,8 +26,6 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
 
     //add the requesting user's ip to the data
     data.userip = req.connection.remoteAddress
-
-    console.log(data)
 
     //check if datetimes are valid (i.e start in future and before end)
     const startstring = data.startdate + 'T' + data.starttime + ':00'
@@ -55,13 +54,17 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
     //reminder email not yet sent
     data.reminder_email_sent = false
 
+    //notifier email not yet sent
+    data.notify_email_sent = false
+
     //everything ok, save reservation to db
-    collection
-      .save(data)
-      .then(
-        meta => console.log('Document saved:', meta._rev),
-        err => console.error('Failed to save document:', err)
-      )
+    collection.save(data).then(
+      meta => {
+        console.log('Document saved:', meta._rev)
+        sendEmail(meta._key)
+      },
+      err => console.error('Failed to save document:', err)
+    )
     //and set the shore status to reserved
     const { _key } = await ShoreModel.updateShoreDocument(
       req.body.selected.key,
@@ -70,9 +73,17 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
 
     res.send({ json: shore, status: 'ok' })
     res.end()
-
-    sendMail(process.env.ADMIN_EMAIL, 'Satakolkyt', 'Uusi varaus')
   } catch (err) {
-    res.send({ error: err.message })
+    console.log(err.message)
+    // res.send({ error: err.message })
+  }
+}
+
+const sendEmail = async key => {
+  const reserv = await ReservationModel.getReservation(key)
+
+  if (!reserv.notify_email_sent) {
+    ReservationModel.updateNotifiedByMultiID(reserv.multiID)
+    sendMail(process.env.ADMIN_EMAIL, 'Satakolkyt', 'Uusi varaus')
   }
 }
