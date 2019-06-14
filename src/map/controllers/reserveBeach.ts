@@ -9,15 +9,13 @@ const collection = db.collection('reservations')
 import { sendMail } from '../../mail'
 import ReservationModel from '../model/reservation'
 
-/**
- * Returns all geosjon feature objects from the db collection.
- */
 export const reserveBeach: RequestHandler = async (req, res, next) => {
+  let shore = null
   try {
     const data = req.body
 
     //check if this piece of shore is actually available
-    const shore = await ShoreModel.getShore(data.selected.key)
+    shore = await ShoreModel.getShore(data.selected.key)
     if (shore.status && shore.status !== 'free') {
       //409: Conflict (should this be used?)
       console.log('Shore unavailable')
@@ -59,9 +57,9 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
 
     //everything ok, save reservation to db
     collection.save(data).then(
-      meta => {
-        console.log('Document saved:', meta._rev)
-        sendEmail(meta._key)
+      async meta => {
+        console.log('Document saved, key:', meta._key)
+        await sendEmail(meta._key, data.multiID)
       },
       err => console.error('Failed to save document:', err)
     )
@@ -70,19 +68,24 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
       req.body.selected.key,
       { status: 'reserved', hasReservation: true }
     )
-
-    res.send({ json: shore, status: 'ok' })
-    res.end()
   } catch (err) {
     console.log(err.message)
-    // res.send({ error: err.message })
+    res.send({ error: err.message })
+    res.end()
+    return
   }
+  res.send({ json: shore, status: 'ok' })
+  res.end()
 }
 
-const sendEmail = async key => {
+//temp cache to get around db updates being async and slow
+const notified_multiIDs = []
+
+const sendEmail = async (key, multiid) => {
   const reserv = await ReservationModel.getReservation(key)
 
-  if (!reserv.notify_email_sent) {
+  if (!reserv.notify_email_sent && !notified_multiIDs.includes(multiid)) {
+    notified_multiIDs.push(multiid)
     ReservationModel.updateNotifiedByMultiID(reserv.multiID)
     sendMail(process.env.ADMIN_EMAIL, 'Satakolkyt', 'Uusi varaus')
   }
