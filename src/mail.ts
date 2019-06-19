@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendMail = (to, subject, html) => {
   transporter.sendMail({
-    from: '"Satakolkyt" <noreply@satakolkyt.fi>',
+    from: '"SATAKOLKYT" <noreply@satakolkyt.fi>',
     to: to,
     subject: subject,
     html: html

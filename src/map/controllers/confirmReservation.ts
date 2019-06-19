@@ -9,6 +9,8 @@ import { RequestHandler } from 'express'
 
 import { sendMail } from '../../mail'
 
+import { ReservationMessage } from '../../messages/reservation.js'
+
 /**
  * Returns all geosjon feature objects from the db collection.
  */
@@ -26,7 +28,11 @@ export const confirmReservation: RequestHandler = async (req, res, next) => {
     const reserv = await ReservationModel.getReservation(req.body.reservation)
 
     if (!reserv.conf_email_sent) {
-      sendMail(reserv.email, 'test', 'reservation confirmed')
+      sendMail(
+        reserv.email,
+        'SATAKOLKYT-rantatalkoot tulossa',
+        ReservationMessage
+      )
       ReservationModel.updateEmailedByMultiID(reserv.multiID)
     }
   } catch (err) {
