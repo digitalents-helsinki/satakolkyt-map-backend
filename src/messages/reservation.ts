@@ -54,4 +54,6 @@ Jos teillä on jotain kysyttävää, toiveita tai palautetta, voitte olla yhteyd
 SATAKOLKYT-hankkeen koordinaattoriin Eevaan: eeva.puustjarvi@hel.fi 044270 0573.<br />
 <br />
 Mukavaa rantaretkeä!
+<br />
+T. SATAKOLKYT-tiimi
 `
