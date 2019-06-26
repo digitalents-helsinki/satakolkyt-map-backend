@@ -1,10 +1,10 @@
-export const ReservationMessage = (len, date) => {
+export const ReservationMessage = (len, date, starttime, endtime) => {
   return `
 <b>Kiitos, että olette lähdössä siivoamaan Helsingin rantaviivaa!</b><br />
 <br />
 
 Varauksen tiedot:<br/>
-- Päivämäärä: ${date}<br/>
+- Päivämäärä: ${date} klo ${starttime} - ${endtime}<br/>
 - Noin ${len} metriä rantaa<br/>
 <br/>
 Tässä vielä käytännön tietoa ja vinkkejä rantatalkoita varten:<br />
