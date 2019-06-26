@@ -1,6 +1,12 @@
-export const ReservationMessage = `
+export const ReservationMessage = (len, date) => {
+  return `
 <b>Kiitos, että olette lähdössä siivoamaan Helsingin rantaviivaa!</b><br />
 <br />
+
+Varauksen tiedot:<br/>
+- Päivämäärä: ${date}<br/>
+- Noin ${len} metriä rantaa<br/>
+<br/>
 Tässä vielä käytännön tietoa ja vinkkejä rantatalkoita varten:<br />
 <br />
 <b>Roskapihdit lainaan kirjastosta</b><br />
@@ -57,3 +63,4 @@ Mukavaa rantaretkeä!
 <br />
 T. SATAKOLKYT-tiimi
 `
+}

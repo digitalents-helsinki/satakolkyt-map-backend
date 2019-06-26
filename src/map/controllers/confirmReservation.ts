@@ -31,7 +31,7 @@ export const confirmReservation: RequestHandler = async (req, res, next) => {
       sendMail(
         reserv.email,
         'SATAKOLKYT-rantatalkoot tulossa',
-        ReservationMessage
+        ReservationMessage(Math.round(reserv.multiLength), reserv.startdate)
       )
       ReservationModel.updateEmailedByMultiID(reserv.multiID)
     }

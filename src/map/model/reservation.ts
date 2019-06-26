@@ -24,6 +24,7 @@ interface IReservationModel {
   userip?: string
   timestamp?: string
   multiID?: string
+  multiLength?: number
   conf_email_sent?: boolean
   reminder_email_sent?: boolean
   notify_email_sent?: boolean
