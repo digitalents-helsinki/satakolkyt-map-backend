@@ -1,10 +1,14 @@
+import moment from 'moment'
+
 export const ReservationMessage = (len, date, starttime, endtime) => {
   return `
 <b>Kiitos, että olette lähdössä siivoamaan Helsingin rantaviivaa!</b><br />
 <br />
 
 Varauksen tiedot:<br/>
-- Päivämäärä: ${date} klo ${starttime} - ${endtime}<br/>
+- Päivämäärä: ${moment(date).format(
+    'DD.MM.YYYY'
+  )} klo ${starttime} - ${endtime}<br/>
 - Noin ${len} metriä rantaa<br/>
 <br/>
 Tässä vielä käytännön tietoa ja vinkkejä rantatalkoita varten:<br />
@@ -40,7 +44,7 @@ alkuperäisiltä lajeiltamme. Keräämme havaintoja kurtturuusu- ja<br />
 jättipalsamiesiintymistä rannoilta. Voit ilmoittaa vieraslajihavaintosi samalla kun<br />
 ilmoitat rannan siivotuksi. Vieraslajiesiintyminen kartoittaminen auttaa vieraslajien<br />
 torjunnan suunnittelussa. Tarkempaa tietoa vieraslajeista ja tunnistusohjeet löydät<br />
-täältä: www.satakolkyt.f/index.php/2019/06/04/rantojen-vieraslajit/<br />
+täältä: www.satakolkyt.fi/index.php/2019/06/04/rantojen-vieraslajit/<br />
 <br />
 <b>Liittykää Itämeren suojelijoiden ihmisketjuun</b><br />
 <br />
@@ -52,7 +56,7 @@ Jakakaa kuvat ja tunnelmat talkoistanne #satakolkyt #pelastanitämertaaskelaskel
 <br />
 <b>Muistakaa ilmoittaa talkoot pidetyiksi</b><br />
 <br />
-Kun talkoot on pidetty, klikatkaa sivulle www.satakolkyt.f ja ilmoittakaa ranta<br />
+Kun talkoot on pidetty, klikatkaa sivulle www.satakolkyt.fi ja ilmoittakaa ranta<br />
 siivotuksi, niin rantaviivan väri kartalla muuttuu vihreäksi. Samalla saatte oman<br />
 siivousporukkanne nimen näkyviin kartalle.<br />
 <br />

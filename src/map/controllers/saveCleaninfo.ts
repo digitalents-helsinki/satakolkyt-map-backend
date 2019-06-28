@@ -7,6 +7,7 @@ const collection = db.collection('cleaninfos')
 const { validationResult } = require('express-validator/check')
 import { sendMail } from '../../mail'
 import CleanInfoModel from '../model/cleaninfo'
+import moment from 'moment'
 
 export const saveCleanInfo: RequestHandler = async (req, res, next) => {
   let shore = null
@@ -86,6 +87,16 @@ const sendEmail = async (key, multiid) => {
   if (!clean.notify_email_sent && !notified_multiIDs.includes(multiid)) {
     notified_multiIDs.push(multiid)
     CleanInfoModel.updateNotifiedByMultiID(clean.multiID)
-    sendMail(process.env.ADMIN_EMAIL, 'Satakolkyt', 'Uusi siivous')
+    sendMail(
+      process.env.ADMIN_EMAIL,
+      'Satakolkyt Uusi siivous',
+      `
+      <h4>Uusi siivousilmoitus vastaanotettu!</h4>
+      <ul>
+        <li>Siivonnut: ${clean.organizer_name}</li>
+        <li>Päivämäärä: ${moment(clean.date).format('DD.MM.YYYY')}</li>
+      </ul>
+    `
+    )
   }
 }

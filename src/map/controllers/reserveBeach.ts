@@ -8,6 +8,7 @@ const { validationResult } = require('express-validator/check')
 const collection = db.collection('reservations')
 import { sendMail } from '../../mail'
 import ReservationModel from '../model/reservation'
+import moment from 'moment'
 
 export const reserveBeach: RequestHandler = async (req, res, next) => {
   let shore = null
@@ -87,6 +88,19 @@ const sendEmail = async (key, multiid) => {
   if (!reserv.notify_email_sent && !notified_multiIDs.includes(multiid)) {
     notified_multiIDs.push(multiid)
     ReservationModel.updateNotifiedByMultiID(reserv.multiID)
-    sendMail(process.env.ADMIN_EMAIL, 'Satakolkyt', 'Uusi varaus')
+    sendMail(
+      process.env.ADMIN_EMAIL,
+      'SATAKOLKYT Uusi varaus',
+      `
+      <h4>Uusi rantavaraus vastaanotettu!</h4>
+      <ul>
+        <li>Varaaja: ${reserv.organizer}</li>
+        <li>Päivämäärä: ${moment(reserv.startdate).format('DD.MM.YYYY')} klo ${
+        reserv.starttime
+      } - ${reserv.endtime}</li>
+        <li>Rantaa varattu: n. ${Math.round(reserv.multiLength)} metriä </li>
+      </ul>
+    `
+    )
   }
 }
