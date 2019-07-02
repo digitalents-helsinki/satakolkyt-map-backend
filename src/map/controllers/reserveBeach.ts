@@ -102,5 +102,7 @@ const sendEmail = async (key, multiid) => {
       </ul>
     `
     )
+  } else {
+    ReservationModel.updateNotifiedByMultiID(reserv.multiID)
   }
 }

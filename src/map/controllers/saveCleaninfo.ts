@@ -98,5 +98,7 @@ const sendEmail = async (key, multiid) => {
       </ul>
     `
     )
+  } else {
+    CleanInfoModel.updateNotifiedByMultiID(clean.multiID)
   }
 }
