@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express'
 import ReservationModel from '../model/reservation'
 import { sendMail } from '../../mail'
-import { CleanNotification } from '../../messages/clean_notification'
+import { Reminder } from '../../messages/reminder'
 
 //THIS IS RUN BY CRON AFTER cron.sh HAS BEEN EXECUTED
 
@@ -10,13 +10,15 @@ export const sendCleanupEmail: RequestHandler = async (req, res, next) => {
   if (pass === process.env.CRON_EMAIL_PASS) {
     console.log('Running cleanup email send routine...')
     const reservs = await ReservationModel.getReservations()
-    const now = new Date()
+    const today = new Date().toISOString().substr(0, 10)
     let count = 0
     for (let r of reservs) {
-      if (!r.reminder_email_sent) {
-        const end = new Date(r.startdate + 'T' + r.endtime + ':00')
-        if (end < now) {
-          sendMail(r.email, 'SATAKOLKYT-rantatalkoot', CleanNotification)
+      if (!r.reminder_email_sent && r.confirmed) {
+        const date = new Date(r.startdate + 'T' + r.endtime + ':00')
+          .toISOString()
+          .substr(0, 10)
+        if (today === date) {
+          sendMail(r.email, 'SATAKOLKYT-rantatalkoot', Reminder)
           count++
           for (let rr of reservs) {
             if (rr.multiID == r.multiID) {
