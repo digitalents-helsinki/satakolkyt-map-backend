@@ -34,6 +34,8 @@ import { deleteReservation } from './controllers/deleteReservation'
 import { deleteOldReservations } from './controllers/deleteOldReservations'
 import { archiveOldCleanShores } from './controllers/archiveOldCleanShores'
 
+import { sendCleanupEmail } from './controllers/sendCleanupEmail'
+
 const csrf = require('csurf')
 import { csrfToken } from './controllers/csrfToken'
 import { deleteCleanedShore } from './controllers/deleteCleanedShore'
@@ -114,5 +116,7 @@ router.post(
   ],
   saveCleanInfo
 )
+
+router.get('/cleanupemail/:pw', sendCleanupEmail)
 
 router.post('/login', login)

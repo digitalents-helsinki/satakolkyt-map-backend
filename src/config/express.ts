@@ -11,7 +11,8 @@ app.use(cookieParser())
 
 //cors
 var allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080')
+  //res.header('Access-Control-Allow-Origin', 'http://localhost:8080')
+  res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN)
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
   res.header(
     'Access-Control-Allow-Headers',
