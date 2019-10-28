@@ -50,6 +50,7 @@ export default class CleanInfoModel {
   static async getCleanedByShoreKey(key: string): Promise<ICleanInfoModel> {
     const cursor = await db.query(aql`
       FOR doc IN ${collection}
+        FILTER doc.archived == false
         FILTER doc.selected.key == ${key}
         RETURN doc
     `)
