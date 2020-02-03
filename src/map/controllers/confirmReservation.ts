@@ -27,20 +27,29 @@ export const confirmReservation: RequestHandler = async (req, res, next) => {
 
     const reserv = await ReservationModel.getReservation(req.body.reservation)
 
-    if (!reserv.conf_email_sent) {
-      sendMail(
-        reserv.email,
-        'SATAKOLKYT-rantatalkoot tulossa',
-        ReservationMessage(
-          Math.round(reserv.multiLength),
-          reserv.startdate,
-          reserv.starttime,
-          reserv.endtime
-        )
-      )
-      ReservationModel.updateEmailedByMultiID(reserv.multiID)
-    }
+    await sendEmail(reserv)
   } catch (err) {
     res.send({ error: err.message })
+  }
+}
+
+const emailed_multiIDs = []
+
+const sendEmail = async reserv => {
+  if (!reserv.conf_email_sent && !emailed_multiIDs.includes(reserv.multiID)) {
+    emailed_multiIDs.push(reserv.multiID)
+    ReservationModel.updateEmailedByMultiID(reserv.multiID)
+    sendMail(
+      reserv.email,
+      'SATAKOLKYT-rantatalkoot tulossa',
+      ReservationMessage(
+        Math.round(reserv.multiLength),
+        reserv.startdate,
+        reserv.starttime,
+        reserv.endtime
+      )
+    )
+  } else {
+    ReservationModel.updateEmailedByMultiID(reserv.multiID)
   }
 }
