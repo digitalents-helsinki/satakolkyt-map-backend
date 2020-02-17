@@ -39,6 +39,7 @@ import { sendCleanupEmail } from './controllers/sendCleanupEmail'
 const csrf = require('csurf')
 import { csrfToken } from './controllers/csrfToken'
 import { deleteCleanedShore } from './controllers/deleteCleanedShore'
+import { archiveCleanedShore } from './controllers/archiveCleanedShore'
 
 const csrfProtection = csrf({ cookie: true })
 
@@ -90,6 +91,7 @@ router.delete('/cleanedshore', checkToken, deleteCleanedShore)
 router.delete('/removeoldreservations', checkToken, deleteOldReservations)
 router.delete('/removeoldcleaninfos', checkToken, archiveOldCleanShores)
 router.post('/clean/', confirmCleaned)
+router.post('/archive', checkToken, archiveCleanedShore)
 router.post(
   '/cleaninfo',
   [
