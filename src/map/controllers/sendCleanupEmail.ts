@@ -18,7 +18,9 @@ export const sendCleanupEmail: RequestHandler = async (req, res, next) => {
           .toISOString()
           .substr(0, 10)
         if (today === date) {
-          sendMail(r.email, 'SATAKOLKYT-rantatalkoot', Reminder)
+          sendMail(r.email, 'SATAKOLKYT-talkoot tulossa', Reminder, {
+            attachments: true
+          })
           count++
           for (let rr of reservs) {
             if (rr.multiID == r.multiID) {

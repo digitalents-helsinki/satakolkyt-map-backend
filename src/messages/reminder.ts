@@ -1,30 +1,29 @@
 export const Reminder = `
-<h1>Kiitos, kun järjestätte rantatalkoot!</h1>
+<div style="font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif">
+    <h3>Kiitos, kun järjestätte rantatalkoot!</h3>
 
-<p>Tässä vielä pari muistutusta talkoopäivää varten:</p>
-<ul>
-    <li>Ilmoittakaa heti talkoiden jälkeen ranta siivotuksi osoitteessa 
-    www.satakolkyt.fi, niin rantaviivan väri kartalla muuttuu vihreäksi. 
-    Samalla saatte oman siivousporukkanne nimen näkyviin kartalle.</li>
-    <li>Jos rannalle jää pois haettavia roskasäkkejä, ilmoittakaa niiden mahdollisimman 
-    tarkka sijainti samalla kun ilmoitatte rannan siivotuksi, jotta ne osataan hakea 
-    pois.</li>
-    <li>Kun ranta on siivottu, muodostakaa rannalle ihmisketju ja ottakaa siitä kuva. 
-    Näin liitytte osaksi kaikkien helsinkiläisten yhteistä Itämeren suojelijoiden 
-    ketjua.</li>
-    <li>Jakakaa kuvat ja tunnelmat rantatalkoista somessa tunnisteilla #satakolkyt ja 
-    #pelastanitämertaaskelaskeleelta ja tägätkää kuviin @satakolkyt, niin saamme 
-    ne näkyviin myös omaan uutisvirtaamme.</li>
-</ul>
+    <p>Muistathan, että:</p>
+    <ul>
+        <li>Kirjastosta saa lainaan yksittäiset roskapihdit tai talkoosetin. Lainaavat kirjastot näkyvät satakolkyt.fi -kartalla.</li>
+        <li>Karttaan on merkitty suuret jäteastiat, joihin talkooroskat voi jättää. Jos rannalle jää pois haettavia roskasäkkejä, ilmoita niiden sijainti samalla kun ilmoitat rannan siivotuksi. Roskat haetaan kaupungin toimesta pois.</li>
+        <li>Ilmoita siivottu ranta satakolkyt.fi -karttaan. Saatte oman siivousporukkanne nimen näkyviin!</li>
+        <li>Paras lopetus siivoukselle on Itämeren suojelijat -ihmisketju siivotulla rannalla. Jaa kuvat tunnisteilla #satakolkyt ja #pelastanitämerta + tägää @satakolkyt, niin näytte uutisvirrassamme.</li>
+    </ul>
+    
+    <p>Kysymykset, toiveet tai palautteet voi laittaa SATAKOLKYT-koordinaattorille info@satakolkyt.fi tai 044 270 0573</p>
 
-<p>Jos teillä on jotain kysyttävää, toiveita tai palautetta, voitte olla yhteydessä 
-SATAKOLKYT-hankkeen koordinaattoriin Eevaan: eeva.puustjarvi@hel.fi 044 270 0573.</p>
+    <p>
+        Kivaa rantaretkeä toivottaa,
+        <br/>
+        SATAKOLKYT-tiimi
+    </p>
 
-<p>Mukavaa rantaretkeä!</p>
-
-<p>T. SATAKOLKYT-tiimi</p>
-
-<p>Seuraa meitä:<br/>
-www.facebook.com/SATAKOLKYT<br/>
-Instagram: @satakolkyt</p>
+    <p>Seuraa meitä:</p>
+    <table cellpadding="10" cellspacing="0">
+        <tr><td><a href="https://www.facebook.com/SATAKOLKYT/"><img src="cid:d0557c41-f196-41fd-abbf-cfe3dd5356dd" style="vertical-align: middle; height: 34px; margin-right: 15px;"/>Facebookissa</a></td></tr>
+        <tr><td><a href="https://www.instagram.com/SATAKOLKYT/"><img src="cid:350673a5-5d18-4966-a9cb-fde89287b726" style="vertical-align: middle; height: 34px; margin-right: 15px;"/>Instagramissa</a></td></tr>
+        <tr><td><a href="https://twitter.com/satakolkyt"><img src="cid:abb0ad98-b191-4afb-8266-4b97c05938ea" style="vertical-align: middle; height: 34px; margin-right: 15px;"/>Twitterissä</a></td></tr>
+        <tr><td><a href="https://satakolkyt.fi/"><img src="cid:29137d21-03d2-4f7f-a944-4c0949dff9e4" style="width: 340px;"/></a></td></tr>
+    </table>
+</div>
 `

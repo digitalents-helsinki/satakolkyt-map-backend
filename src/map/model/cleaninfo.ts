@@ -28,7 +28,7 @@ interface ICleanInfoModel {
   timestamp?: string
   archived?: boolean
   multiID?: string
-  //conf_email_sent?: boolean
+  conf_email_sent?: boolean
   notify_email_sent?: boolean
 }
 
@@ -64,14 +64,13 @@ export default class CleanInfoModel {
     })
   }
 
-  //Obsolete at least for now
-  /*static async updateEmailedByMultiID(multiID: string) {
+  static async updateEmailedByMultiID(multiID: string) {
     db.query(aql`
       FOR doc IN ${collection}
         FILTER doc.multiID == ${multiID}
         UPDATE {_key: doc._key, conf_email_sent: true} IN ${collection}
     `)
-  }*/
+  }
 
   static async updateNotifiedByMultiID(multiID: string) {
     db.query(aql`

@@ -1,68 +1,50 @@
 import moment from 'moment'
 
-export const ReservationMessage = (len, date, starttime, endtime) => {
-  return `
-<h1>Kiitos, että olette lähdössä siivoamaan Helsingin rantaviivaa!</h1>
+export const ReservationMessage = `
+  <div style="font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif">
+  <h3>Kiitos, että lähdette siivoamaan Helsingin rantoja!</h3>
 
-<h2>Varauksen tiedot</h2>
-<ul>
-  <li>Päivämäärä: ${moment(date).format(
-    'DD.MM.YYYY'
-  )} klo ${starttime} - ${endtime}</li>
-  <li>Noin ${len} metriä rantaa</li>
-</ul>
+  <p>Tässä käytännön tietoa ja vinkkejä siivousta varten:</p>
 
-<p>Tässä vielä käytännön tietoa ja vinkkejä rantatalkoita varten:</p>
+  <h4>Roskapihdit tai talkoosetti lainaan kirjastosta</h4>
+  <p>
+      Kirjastosta saa lainaan yksittäiset roskapihdit tai noin kymmenen hengen talkoosetin. Lainaavat kirjastot näkyvät kartalla www.satakolkyt.fi. 
+      <br/>
+      <strong>Huom!</strong> Jos tarvitsette suuremman määrän roskapihtejä, voitte olla yhteydessä kaupungin talkootoiminnan koordinaattoriin Armi Koskelaan, 040-7190824, armi.koskela@hel.fi
+  </p>
 
-<h3>Roskapihdit lainaan kirjastosta</h3>
-<p>Talkoita varten voitte lainata kirjastosta yksittäiset roskapihdit tai SATAKOLKYT-
-talkoosetin, joka sisältää kymmenet roskapihdit, 1 rll roskapusseja ja muutaman 
-jätesäkin. Talkoosetin laina-aika on 3 vrk ja yksittäisten roskapihtien 14 vrk. 
-Roskapihtejä lainaavat kirjastot näkyvät www.satakolkyt.fi -sivuston kartalla. 
-Jos tiedossa on suuremmat talkoot, joihin tarvitsette enemmän roskapihtejä, voitte olla 
-suoraan yhteydessä kaupungin talkootoiminnan koordinaattoriin Armi Koskelaan (puh. 
-040-7190824, armi.koskela@hel.fi).</p>
+  <h4>Mitä kerätyille roskille tehdään?</h4>
+  <p>
+      Karttaan on merkitty suuret jäteastiat, joihin talkooroskat voi jättää. Jos lähettyvillä ei ole roskiksia tai roskat eivät helposti mahdu sinne, ne voi myös jättää tiiviisti suljetuissa jätesäkeissä johonkin helposti löydettävään paikkaan. Ilmoita pois haettavista roskasäkeistä samalla kun ilmoitat rannan siivotuksi kartalle. Kaupungin työntekijät hakevat säkit pois muutaman päivän sisällä.
+      <br/>
+      <strong>Huom!</strong> Pieniä roskiksia ei kannata täyttää aivan täyteen talkooroskilla, sillä niissä on hyvä olla tilaa myös tavallisille roskille. Eläimet myös repivät liian täyteen ahdettuja roskiksia.
+  </p>
 
-<h3>Mitä kerätyille roskille tehdään?</h3>
-<p>Kartalla näkyvät rannoilla olevat suuret jäteastiat, joihin talkooroskat voi jättää. Pieniä 
-roskiksia ei kannata täyttää aivan täyteen talkooroskilla, sillä niissä on hyvä olla tilaa 
-myös tavallisille roskille. Eläimet repivät helposti roskia liian täyteen ahdetuista 
-roskiksista. Jos rannalle ei ole tarpeeksi jäteastioita tai roskat eivät mahdu niihin, 
-talkooroskat voi jättää tiiviisti suljetuissa jätesäkeissä roskisten viereen tai muuhun 
-helposti löydettävään paikkaan. Ilmoittakaa silloin pois haettavista roskasäkeistä 
-samalla kun ilmoitatte rannan siivotuksi www.satakolkyt.fi -sivuston kartalla. 
-Kaupungin työntekijät hakevat roskat pois muutaman päivän sisällä.</p>
+  <h4>Muista ilmoittaa ranta siivotuksi</h4>
+  <p>
+      Ilmoita mahdollisimman pian siivouksen jälkeen siivottu ranta satakolkyt.fi -karttaan. Näin pidetään kartta ajantasaisena ja saatte oman siivousporukkanne nimen näkyviin!
+  </p>
 
-<h3>Bongatkaa vieraslaji rannalta</h3>
-<p>Rannoillemme levittäytyy myös haitallisia vieraslajeja, jotka vievät elintilaan 
-alkuperäisiltä lajeiltamme. Keräämme havaintoja kurtturuusu- ja 
-jättipalsamiesiintymistä Helsingin rannoilta. Voit ilmoittaa vieraslajihavaintosi samalla 
-kun ilmoitat rannan siivotuksi. Vieraslajiesiintyminen kartoittaminen auttaa vieraslajien
-torjunnan suunnittelussa. Tarkempaa tietoa vieraslajeista ja tunnistusohjeet löydät 
-täältä: www.satakolkyt.f/index.php/2019/06/04/rantojen-vieraslajit/</p>
+  <h4>Liity Itämeren suojelijoiden ihmisketjuun</h4>
+  <p>Paras lopetus siivoukselle on ihmisketju siivotulla rannalla. Kuvaa ketju ja jaa tunnisteilla #satakolkyt ja #pelastanitämerta. Tägää kuviin @satakolkyt, niin saamme ne näkyviin uutisvirtaamme. Katso kuvia <a href="https://www.instagram.com/SATAKOLKYT/">täältä</a>.</p>
 
-<h3>Liittykää Itämeren suojelijoiden ihmisketjuun</h3>
-<p>Paras lopetus talkoille on Itämeren suojelijoiden ihmisketjun muodostaminen siivotulle 
-rannalle. Asettukaa riviin rannalle katse merelle päin, ottakaa kaveria käsistä kiinni ja 
-levittäkää ketjun niin pitkälle kuin yllätte. Ottakaa ketjusta kuva rannan puolelta 
-merelle päin.  Jakakaa kuvat ja tunnelmat talkoistanne #satakolkyt 
-#pelastanitämertaaskelaskeleelta. Lisätietoa ja esimerkkikuvia: 
-www.satakolkyt.f/index.php/2019/05/31/liity-itameren-suojelijoiden-ketjuun/</p>
+  <h4>Lisävinkki: Bongaa vieraslaji rannalta</h4>
+  <p>Rannoillemme levittäytyy haitallisia vieraslajeja vieden elintilaan alkuperäisiltä lajeiltamme. Keräämme havaintoja kurtturuusu- ja jättipalsamiesiintymistä. Auta vieraslajien torjunnan suunnittelussa ja ilmoita havaintosi karttaan samalla kun ilmoitat rannan siivotuksi. Tietoa ja tunnistusohjeet vieraslajeista <a href="https://satakolkyt.fi/">täältä</a>.</p>
 
-<h3>Muistakaa ilmoittaa talkoot pidetyiksi</h3>
-<p>Kun talkoot on pidetty, klikatkaa sivulle 
-www.satakolkyt.fi ja ilmoittakaa ranta siivotuksi, niin rantaviivan väri kartalla muuttuu 
-vihreäksi. Samalla saatte oman siivousporukkanne nimen näkyviin kartalle.</p>
+  <p>
+      Mukavaa rantaretkeä toivottaen,
+      <br>
+      SATAKOLKYT-tiimi
+  </p>
 
-<p>Jos teillä on jotain kysyttävää, toiveita tai palautetta, voitte olla yhteydessä 
-SATAKOLKYT-hankkeen koordinaattoriin Eevaan: eeva.puustjarvi@hel.fi 044 270 0573.</p>
+  <p>Ja hei, kysymykset, toiveet tai palautteet voi laittaa SATAKOLKYT- koordinaattorille: info@satakolkyt.fi tai 044 270 0573</p>
 
-<p>Mukavaa rantaretkeä!</p>
-
-<p>T. SATAKOLKYT-tiimi</p>
-
-<p>Seuraa meitä:<br/>
-www.facebook.com/SATAKOLKYT<br/>
-Instagram: @satakolkyt</p>
+  <p>Seuraa meitä:</p>
+  <table cellpadding="10" cellspacing="0">
+      <tr><td><a href="https://www.facebook.com/SATAKOLKYT/"><img src="cid:d0557c41-f196-41fd-abbf-cfe3dd5356dd" style="vertical-align: middle; height: 34px; margin-right: 15px;"/>Facebookissa</a></td></tr>
+      <tr><td><a href="https://www.instagram.com/SATAKOLKYT/"><img src="cid:350673a5-5d18-4966-a9cb-fde89287b726" style="vertical-align: middle; height: 34px; margin-right: 15px;"/>Instagramissa</a></td></tr>
+      <tr><td><a href="https://twitter.com/satakolkyt"><img src="cid:abb0ad98-b191-4afb-8266-4b97c05938ea" style="vertical-align: middle; height: 34px; margin-right: 15px;"/>Twitterissä</a></td></tr>
+      <tr><td><a href="https://satakolkyt.fi/"><img src="cid:29137d21-03d2-4f7f-a944-4c0949dff9e4" style="width: 340px;"/></a></td></tr>
+  </table>
+</div>
 `
-}

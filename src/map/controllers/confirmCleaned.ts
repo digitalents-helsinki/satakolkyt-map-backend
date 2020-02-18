@@ -4,7 +4,8 @@ import ShoreModel from '../model/shore'
 import CleanInfoModel from '../model/cleaninfo'
 import StepsKmModel from '../model/steps_km_info'
 import { RequestHandler } from 'express'
-//import { sendMail } from '../../mail'
+import { sendMail } from '../../mail'
+import { cleanConfirmation } from '../../messages/cleanConfirmation'
 
 export const confirmCleaned: RequestHandler = async (req, res, next) => {
   try {
@@ -27,15 +28,15 @@ export const confirmCleaned: RequestHandler = async (req, res, next) => {
     res.send({ status: 'ok' })
     res.end()
 
-    //Not needed at least for now
-    /*if (!cleaninfo.conf_email_sent) {
+    if (!cleaninfo.conf_email_sent) {
+      await CleanInfoModel.updateEmailedByMultiID(cleaninfo.multiID)
       sendMail(
         cleaninfo.leader_email,
-        'Siivouksenne on vahvistettu',
-        'Siivouksenne on nyt vahvistettu. SATAKOLKYT kiittää! Henkilötietonne on poistettu järjestelmästä.'
+        'Kiitos, kun osallistuitte SATAKOLKYT-talkoisiin!',
+        cleanConfirmation,
+        { attachments: true }
       )
-      CleanInfoModel.updateEmailedByMultiID(cleaninfo.multiID)
-    }*/
+    }
   } catch (err) {
     res.send({ error: err.message })
   }

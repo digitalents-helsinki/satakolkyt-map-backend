@@ -41,13 +41,9 @@ const sendEmail = async reserv => {
     ReservationModel.updateEmailedByMultiID(reserv.multiID)
     sendMail(
       reserv.email,
-      'SATAKOLKYT-rantatalkoot tulossa',
-      ReservationMessage(
-        Math.round(reserv.multiLength),
-        reserv.startdate,
-        reserv.starttime,
-        reserv.endtime
-      )
+      'Tervetuloa mukaan SATAKOLKYT-talkoisiin!',
+      ReservationMessage,
+      { attachments: true }
     )
   } else {
     ReservationModel.updateEmailedByMultiID(reserv.multiID)
