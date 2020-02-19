@@ -32,8 +32,8 @@ export const confirmCleaned: RequestHandler = async (req, res, next) => {
       await CleanInfoModel.updateEmailedByMultiID(cleaninfo.multiID)
       sendMail(
         cleaninfo.leader_email,
-        generateTitle('confirmation'),
-        composeMessage('confirmation'),
+        generateTitle('confirmation', cleaninfo.language || 'fi'),
+        composeMessage('confirmation', cleaninfo.language || 'fi'),
         { attachments: true }
       )
     }

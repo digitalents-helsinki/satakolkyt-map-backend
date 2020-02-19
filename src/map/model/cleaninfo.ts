@@ -30,6 +30,7 @@ interface ICleanInfoModel {
   multiID?: string
   conf_email_sent?: boolean
   notify_email_sent?: boolean
+  language?: 'fi' | 'sv' | 'en'
 }
 
 export default class CleanInfoModel {

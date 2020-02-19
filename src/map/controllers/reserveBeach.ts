@@ -113,8 +113,8 @@ const sendEmail = async (key, multiid) => {
     ReservationModel.updateEmailedByMultiID(reserv.multiID)
     sendMail(
       reserv.email,
-      generateTitle('reservation'),
-      composeMessage('reservation'),
+      generateTitle('reservation', reserv.language || 'fi'),
+      composeMessage('reservation', reserv.language || 'fi'),
       { attachments: true }
     )
   } else {

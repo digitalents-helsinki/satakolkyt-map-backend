@@ -28,6 +28,7 @@ interface IReservationModel {
   conf_email_sent?: boolean
   reminder_email_sent?: boolean
   notify_email_sent?: boolean
+  language?: 'fi' | 'sv' | 'en'
 }
 
 export default class ReservationModel {
