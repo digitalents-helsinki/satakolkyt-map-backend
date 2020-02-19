@@ -9,7 +9,7 @@ import { RequestHandler } from 'express'
 
 import { sendMail } from '../../mail'
 
-import { ReservationMessage } from '../../messages/reservation.js'
+import { generateTitle, composeMessage } from '../../messages/composeMessage'
 
 /**
  * Returns all geosjon feature objects from the db collection.
@@ -41,8 +41,8 @@ const sendEmail = async reserv => {
     ReservationModel.updateEmailedByMultiID(reserv.multiID)
     sendMail(
       reserv.email,
-      'Tervetuloa mukaan SATAKOLKYT-talkoisiin!',
-      ReservationMessage,
+      generateTitle('reservation'),
+      composeMessage('reservation'),
       { attachments: true }
     )
   } else {

@@ -5,7 +5,7 @@ import CleanInfoModel from '../model/cleaninfo'
 import StepsKmModel from '../model/steps_km_info'
 import { RequestHandler } from 'express'
 import { sendMail } from '../../mail'
-import { cleanConfirmation } from '../../messages/cleanConfirmation'
+import { generateTitle, composeMessage } from '../../messages/composeMessage'
 
 export const confirmCleaned: RequestHandler = async (req, res, next) => {
   try {
@@ -32,8 +32,8 @@ export const confirmCleaned: RequestHandler = async (req, res, next) => {
       await CleanInfoModel.updateEmailedByMultiID(cleaninfo.multiID)
       sendMail(
         cleaninfo.leader_email,
-        'Kiitos, kun osallistuitte SATAKOLKYT-talkoisiin!',
-        cleanConfirmation,
+        generateTitle('confirmation'),
+        composeMessage('confirmation'),
         { attachments: true }
       )
     }

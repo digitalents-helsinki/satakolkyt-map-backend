@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express'
 import ReservationModel from '../model/reservation'
 import { sendMail } from '../../mail'
-import { Reminder } from '../../messages/reminder'
+import { generateTitle, composeMessage } from '../../messages/composeMessage'
 
 //THIS IS RUN BY CRON AFTER cron.sh HAS BEEN EXECUTED
 
@@ -18,9 +18,14 @@ export const sendCleanupEmail: RequestHandler = async (req, res, next) => {
           .toISOString()
           .substr(0, 10)
         if (today === date) {
-          sendMail(r.email, 'SATAKOLKYT-talkoot tulossa', Reminder, {
-            attachments: true
-          })
+          sendMail(
+            r.email,
+            generateTitle('reminder'),
+            composeMessage('reminder'),
+            {
+              attachments: true
+            }
+          )
           count++
           for (let rr of reservs) {
             if (rr.multiID == r.multiID) {
