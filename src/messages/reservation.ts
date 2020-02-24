@@ -1,9 +1,20 @@
-export default (lang: 'fi' | 'sv' | 'en') =>
+import moment from 'moment'
+import { IReservationModel } from '../map/model/reservation'
+
+export default (lang: 'fi' | 'sv' | 'en', reserv: IReservationModel) =>
   ({
     fi: `
     <div style="font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif">
     <h3>Kiitos, että lähdette siivoamaan Helsingin rantoja!</h3>
-  
+
+    <h2>Varauksen tiedot</h2>
+    <ul>
+      <li>Päivämäärä: ${moment(reserv.startdate).format('DD.MM.YYYY')} klo ${
+      reserv.starttime
+    } - ${reserv.endtime}</li>
+      <li>Noin ${Math.round(reserv.multiLength)} metriä rantaa</li>
+    </ul>
+    
     <p>Tässä käytännön tietoa ja vinkkejä siivousta varten:</p>
   
     <h4>Roskapihdit tai talkoosetti lainaan kirjastosta</h4>
@@ -54,6 +65,14 @@ export default (lang: 'fi' | 'sv' | 'en') =>
   <div style="font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif">
   <h3>Tack för att ni vill vara med och städa upp Helsingfors stränder!</h3>
 
+  <h2>Bokningsinformation</h2>
+  <ul>
+    <li>Datum: ${moment(reserv.startdate).format('DD.MM.YYYY')} kl ${
+      reserv.starttime
+    } - ${reserv.endtime}</li>
+    <li>Ungefär ${Math.round(reserv.multiLength)} meter strand</li>
+  </ul>
+
   <p>Här följer praktisk information och tips inför städandet:</p>
 
   <h4>Låna skräptänger eller talko-set från biblioteken</h4>
@@ -103,6 +122,14 @@ export default (lang: 'fi' | 'sv' | 'en') =>
     en: `
 <div style="font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif">
 <h3>Thank you for participating in the cleanup of Helsinki beaches!</h3>
+
+<h2>Varauksen tiedot</h2>
+<ul>
+  <li>Date: ${moment(reserv.startdate).format('DD.MM.YYYY')} ${
+      reserv.starttime
+    } - ${reserv.endtime} o'clock</li>
+  <li>About ${Math.round(reserv.multiLength)} meters of beach</li>
+</ul>
 
 <p>Please find below some practical information and tips for cleaning:</p>
 

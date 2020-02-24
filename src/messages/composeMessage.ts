@@ -1,10 +1,11 @@
 import reservation from './reservation'
 import reminder from './reminder'
 import confirmation from './confirmation'
+import { IReservationModel } from '../map/model/reservation'
 
 export function generateTitle(
   type: 'reservation' | 'reminder' | 'confirmation',
-  language: 'fi' | 'sv' | 'en' = 'fi'
+  language: 'fi' | 'sv' | 'en'
 ) {
   return {
     reservation: {
@@ -27,12 +28,13 @@ export function generateTitle(
 
 export function composeMessage(
   type: 'reservation' | 'reminder' | 'confirmation',
-  language: 'fi' | 'sv' | 'en' = 'fi'
+  language: 'fi' | 'sv' | 'en',
+  reserv?: IReservationModel
 ) {
   const messages = {
     reservation,
     reminder,
     confirmation
   }
-  return messages[type](language)
+  return messages[type](language, reserv)
 }

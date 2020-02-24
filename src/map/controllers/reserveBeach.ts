@@ -114,7 +114,7 @@ const sendEmail = async (key, multiid) => {
     sendMail(
       reserv.email,
       generateTitle('reservation', reserv.language || 'fi'),
-      composeMessage('reservation', reserv.language || 'fi'),
+      composeMessage('reservation', reserv.language || 'fi', reserv),
       { attachments: true }
     )
   } else {

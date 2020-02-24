@@ -23,8 +23,8 @@ export const sendCleanupEmail: RequestHandler = async (req, res, next) => {
         if (today === date && today !== reservationDate) {
           sendMail(
             r.email,
-            generateTitle('reminder'),
-            composeMessage('reminder'),
+            generateTitle('reminder', r.language || 'fi'),
+            composeMessage('reminder', r.language || 'fi'),
             {
               attachments: true
             }
