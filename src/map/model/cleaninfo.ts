@@ -5,7 +5,7 @@ import { db } from '@/config/arangodb'
 
 const collection = db.collection('cleaninfos')
 
-interface ICleanInfoModel {
+export interface ICleanInfoModel {
   _key?: string
   _id?: string
   _rev?: string
