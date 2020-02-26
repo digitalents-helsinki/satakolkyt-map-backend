@@ -15,9 +15,7 @@ export const sendCleanupEmail: RequestHandler = async (req, res, next) => {
     let count = 0
     for (let r of reservs) {
       if (!r.reminder_email_sent && r.confirmed) {
-        const reservationDate = new Date(r.timestamp)
-          .toISOString()
-          .substring(0, 10)
+        const reservationDate = r.timestamp.substring(0, 10)
         const date = new Date(r.startdate + 'T' + r.endtime + ':00')
           .toISOString()
           .substr(0, 10)
