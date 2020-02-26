@@ -2,12 +2,13 @@ import { RequestHandler } from 'express'
 import ReservationModel from '../model/reservation'
 import { sendMail } from '../../mail'
 import { generateTitle, composeMessage } from '../../messages/composeMessage'
+import timingSafeCompare from 'tsscmp'
 
 //THIS IS RUN BY CRON AFTER cron.sh HAS BEEN EXECUTED
 
 export const sendCleanupEmail: RequestHandler = async (req, res, next) => {
   const pass = req.params.pw
-  if (pass === process.env.CRON_EMAIL_PASS) {
+  if (timingSafeCompare(process.env.CRON_EMAIL_PASS, pass)) {
     console.log('Running cleanup email send routine...')
     const reservs = await ReservationModel.getReservations()
     const today = new Date().toISOString().substr(0, 10)
