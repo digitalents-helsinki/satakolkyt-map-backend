@@ -3,17 +3,16 @@
 import jwt from 'jsonwebtoken'
 import { config } from './config/jwt'
 import { RequestHandler } from 'express'
+import timingSafeCompare from 'tsscmp'
 
 export const login: RequestHandler = async (req, res, next) => {
-  let username = req.body.username
-  let password = req.body.password
-
+  const username = req.body.username
+  const password = req.body.password
   if (username && password) {
-    if (
-      username === process.env.FRONT_USER &&
-      password === process.env.FRONT_PASS
-    ) {
-      let token = jwt.sign({ username: username }, config.secret, {
+    const validUser = timingSafeCompare(process.env.FRONT_USER, username)
+    const validPass = timingSafeCompare(process.env.FRONT_PASS, password)
+    if (validUser && validPass) {
+      const token = jwt.sign({ username: username }, config.secret, {
         expiresIn: '24h'
       })
       res.json({

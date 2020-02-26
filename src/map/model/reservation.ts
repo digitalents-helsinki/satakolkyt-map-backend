@@ -5,7 +5,7 @@ import { db } from '@/config/arangodb'
 
 const collection = db.collection('reservations')
 
-interface IReservationModel {
+export interface IReservationModel {
   _key?: string
   _id?: string
   _rev?: string
@@ -28,6 +28,7 @@ interface IReservationModel {
   conf_email_sent?: boolean
   reminder_email_sent?: boolean
   notify_email_sent?: boolean
+  language?: 'fi' | 'sv' | 'en'
 }
 
 export default class ReservationModel {

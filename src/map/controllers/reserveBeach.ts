@@ -9,6 +9,7 @@ const collection = db.collection('reservations')
 import { sendMail } from '../../mail'
 import ReservationModel from '../model/reservation'
 import moment from 'moment'
+import { generateTitle, composeMessage } from '../../messages/composeMessage'
 
 export const reserveBeach: RequestHandler = async (req, res, next) => {
   let shore = null
@@ -81,6 +82,7 @@ export const reserveBeach: RequestHandler = async (req, res, next) => {
 
 //temp cache to get around db updates being async and slow
 const notified_multiIDs = []
+const emailed_multiIDs = []
 
 const sendEmail = async (key, multiid) => {
   const reserv = await ReservationModel.getReservation(key)
@@ -104,5 +106,18 @@ const sendEmail = async (key, multiid) => {
     )
   } else {
     ReservationModel.updateNotifiedByMultiID(reserv.multiID)
+  }
+
+  if (!reserv.conf_email_sent && !emailed_multiIDs.includes(reserv.multiID)) {
+    emailed_multiIDs.push(reserv.multiID)
+    ReservationModel.updateEmailedByMultiID(reserv.multiID)
+    sendMail(
+      reserv.email,
+      generateTitle('reservation', reserv.language || 'fi'),
+      composeMessage('reservation', reserv.language || 'fi', reserv),
+      { attachments: true }
+    )
+  } else {
+    ReservationModel.updateEmailedByMultiID(reserv.multiID)
   }
 }

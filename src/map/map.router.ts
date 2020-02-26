@@ -39,13 +39,22 @@ import { sendCleanupEmail } from './controllers/sendCleanupEmail'
 const csrf = require('csurf')
 import { csrfToken } from './controllers/csrfToken'
 import { deleteCleanedShore } from './controllers/deleteCleanedShore'
+import { archiveCleanedShore } from './controllers/archiveCleanedShore'
 
-const csrfProtection = csrf({ cookie: true })
+const csrfProtection = csrf({
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true,
+    sameSite: 'none'
+  }
+})
 
 export const router = Router()
 
+router.use(csrfProtection)
+
 router.get('/shores', getFreeShores)
-router.get('/token', csrfProtection, csrfToken)
+router.get('/token', csrfToken)
 
 router.get('/shore/:key', getShore)
 router.get('/shores/reserved', getReservedShores)
@@ -81,7 +90,7 @@ router.post(
   ],
   reserveBeach
 )
-router.post('/confirmreservation', confirmReservation)
+router.post('/confirmreservation', checkToken, confirmReservation)
 router.post('/cancelreservation', checkToken, cancelReservation)
 router.post('/cancelcleanedbeach', checkToken, cancelCleanShore)
 router.post('/unhidebeach', checkToken, unhideBeach)
@@ -89,7 +98,8 @@ router.delete('/reservation', checkToken, deleteReservation)
 router.delete('/cleanedshore', checkToken, deleteCleanedShore)
 router.delete('/removeoldreservations', checkToken, deleteOldReservations)
 router.delete('/removeoldcleaninfos', checkToken, archiveOldCleanShores)
-router.post('/clean/', confirmCleaned)
+router.post('/clean/', checkToken, confirmCleaned)
+router.post('/archive', checkToken, archiveCleanedShore)
 router.post(
   '/cleaninfo',
   [

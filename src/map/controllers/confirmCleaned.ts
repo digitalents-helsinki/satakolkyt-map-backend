@@ -1,10 +1,11 @@
 // Copyright (C) 2019 Digitalents Helsinki
 
 import ShoreModel from '../model/shore'
-import CleanInfoModel from '../model/cleaninfo'
+import CleanInfoModel, { ICleanInfoModel } from '../model/cleaninfo'
 import StepsKmModel from '../model/steps_km_info'
 import { RequestHandler } from 'express'
-//import { sendMail } from '../../mail'
+import { sendMail } from '../../mail'
+import { generateTitle, composeMessage } from '../../messages/composeMessage'
 
 export const confirmCleaned: RequestHandler = async (req, res, next) => {
   try {
@@ -27,16 +28,28 @@ export const confirmCleaned: RequestHandler = async (req, res, next) => {
     res.send({ status: 'ok' })
     res.end()
 
-    //Not needed at least for now
-    /*if (!cleaninfo.conf_email_sent) {
-      sendMail(
-        cleaninfo.leader_email,
-        'Siivouksenne on vahvistettu',
-        'Siivouksenne on nyt vahvistettu. SATAKOLKYT kiittää! Henkilötietonne on poistettu järjestelmästä.'
-      )
-      CleanInfoModel.updateEmailedByMultiID(cleaninfo.multiID)
-    }*/
+    sendEmail(cleaninfo)
   } catch (err) {
     res.send({ error: err.message })
+  }
+}
+
+const emailed_multiIDs = []
+
+const sendEmail = (cleaninfo: ICleanInfoModel) => {
+  if (
+    !cleaninfo.conf_email_sent &&
+    !emailed_multiIDs.includes(cleaninfo.multiID)
+  ) {
+    emailed_multiIDs.push(cleaninfo.multiID)
+    CleanInfoModel.updateEmailedByMultiID(cleaninfo.multiID)
+    sendMail(
+      cleaninfo.leader_email,
+      generateTitle('confirmation', cleaninfo.language || 'fi'),
+      composeMessage('confirmation', cleaninfo.language || 'fi'),
+      { attachments: true }
+    )
+  } else {
+    CleanInfoModel.updateEmailedByMultiID(cleaninfo.multiID)
   }
 }
