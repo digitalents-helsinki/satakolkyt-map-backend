@@ -43,7 +43,7 @@ import { archiveCleanedShore } from './controllers/archiveCleanedShore'
 
 const csrfProtection = csrf({
   cookie: {
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV !== 'development',
     httpOnly: true,
     sameSite: 'none'
   }
